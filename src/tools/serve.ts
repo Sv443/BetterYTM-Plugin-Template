@@ -3,7 +3,7 @@
  * Learn more about express here: https://expressjs.com/
  * 
  * Arguments:
- * --port=1234         // Specify the port on which the server should run
+ * --port=1234         // Specify the port on which the server should run - falls back to the env var DEV_SERVER_PORT or the default port in vite.config.ts
  * --auto-exit-time=10 // Automatically exit the server after a given amount of seconds - enables request logging if provided
  */
 

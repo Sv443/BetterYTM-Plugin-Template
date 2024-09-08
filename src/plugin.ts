@@ -22,8 +22,8 @@ export const pluginDef: PluginDef = {
       name: license,
       url: licenseUrl,
     },
-    // If you have a logo, you can add it here (should *ideally* be square and between 48x48 and 128x128):
-    iconUrl: "https://picsum.photos/64/64",
+    // If you have a logo, you can add it here - it should *ideally* be square and between 48x48 and 128x128:
+    iconUrl: "https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png",
   },
   // If you have contributors defined in package.json, you can add them here:
   // contributors,

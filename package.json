@@ -21,9 +21,9 @@
     "url": "git+https://github.com/Sv443/BetterYTM-Plugin-Template.git"
   },
   "scripts": {
-    "dev": "concurrently \"nodemon --exec vite build --mode development\" \"pnpm run serve\"",
-    "build-dev": "vite build --watch --mode development",
-    "build": "vite build --watch --mode production",
+    "dev": "concurrently \"nodemon --exec pnpm run build-dev\" \"pnpm run serve\"",
+    "build-dev": "vite build --mode development",
+    "build": "vite build --mode production",
     "serve": "pnpm run node-ts ./src/tools/serve.ts",
     "node-ts": "node --no-warnings=ExperimentalWarning --enable-source-maps --loader ts-node/esm",
     "lint": "eslint ./src",

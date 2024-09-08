@@ -1,7 +1,7 @@
 import { events, tryRegisterPlugin } from "@/plugin.js";
 import { log } from "@/logging.js";
-import { examplePreInit } from "@/example/preInit.ts";
-import { exampleMainEntrypoint } from "@/example/main.ts";
+import { examplePreInit } from "@/example/preInit.js";
+import { exampleMainEntrypoint } from "@/example/main.js";
 import { someJsdocFunction, somePlainFunction } from "@/example/plainJs.mjs";
 import "@/types.js";
 
