@@ -163,25 +163,10 @@
   function log(...args) {
     console.log(consPrefix, ...args);
   }
-  unsafeWindow.addEventListener("bytm:registerPlugin", async (registerPlugin) => {
-    try {
-      preInit();
-      try {
-        await tryRegisterPlugin(registerPlugin);
-        log(`Registered plugin successfully!
-Using the BetterYTM API v${unsafeWindow.BYTM.version}`);
-      } catch (err) {
-        console.error("Couldn't register plugin:", err);
-      }
-      events.once("bytm:ready", main);
-    } catch (err) {
-      console.error("A generic error occurred:", err);
-    }
-  });
-  function preInit() {
+  function examplePreInit() {
     unsafeWindow.BYTM.UserUtils.interceptWindowEvent("beforeunload", () => true);
   }
-  async function main() {
+  async function exampleMainEntrypoint() {
     const button = document.createElement("button");
     button.textContent = "Click me!";
     unsafeWindow.BYTM.addSelectorListener("playerBar", ".middle-controls-buttons", {
@@ -223,5 +208,37 @@ tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path 
       log("BYTM's locale is", features.locale);
       log("BYTM's log level is", features.logLevel, `(${LogLevel[features.logLevel]})`);
     }
+  }
+  function someJsdocFunction(arg) {
+    console.log("Hello from JS!", Math.pow(arg, 2));
+    return 1;
+  }
+  function somePlainFunction(arg) {
+    console.log("Hello from JS!", arg);
+    return 1;
+  }
+  unsafeWindow.addEventListener("bytm:registerPlugin", async (registerPlugin) => {
+    try {
+      preInit();
+      try {
+        await tryRegisterPlugin(registerPlugin);
+        log(`Registered plugin successfully!
+Using the BetterYTM API v${unsafeWindow.BYTM.version}`);
+      } catch (err) {
+        console.error("Couldn't register plugin:", err);
+      }
+      events.once("bytm:ready", run);
+    } catch (err) {
+      console.error("A generic error occurred:", err);
+    }
+  });
+  function preInit() {
+    examplePreInit();
+    const foo = someJsdocFunction(9);
+    const bar = somePlainFunction("any type is allowed");
+    log("foo:", foo, "bar:", bar);
+  }
+  async function run() {
+    await exampleMainEntrypoint();
   }
 })();
