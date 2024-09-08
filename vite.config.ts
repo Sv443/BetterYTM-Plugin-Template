@@ -70,6 +70,8 @@ export default defineConfig(({ mode }) => {
             "GM.deleteValue",
             "GM.openInTab",
           ],
+          // don't run in iframes:
+          noframes: true,
           match: [
             "https://youtube.com/*",
             "https://music.youtube.com/*",

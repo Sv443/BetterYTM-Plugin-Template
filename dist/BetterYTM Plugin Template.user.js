@@ -17,6 +17,7 @@
 // @grant       GM.getValue
 // @grant       GM.deleteValue
 // @grant       GM.openInTab
+// @noframes    
 // @match       https://youtube.com/*
 // @match       https://music.youtube.com/*
 // @iconURL     https://raw.githubusercontent.com/Sv443/main/assets/plugin_icon_128x128.png
