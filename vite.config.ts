@@ -76,7 +76,7 @@ export default defineConfig(({ mode }) => {
             "https://youtube.com/*",
             "https://music.youtube.com/*",
           ],
-          iconURL: getResourceUrl(mode, "assets/plugin_icon_128x128.png"),
+          icon: getResourceUrl(mode, "assets/plugin_icon_128x128.png"),
           // since the .meta.js is not committed, updating via that URL is not possible
           updateURL: undefined,
           resource: [

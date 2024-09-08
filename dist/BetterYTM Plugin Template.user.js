@@ -20,7 +20,7 @@
 // @noframes    
 // @match       https://youtube.com/*
 // @match       https://music.youtube.com/*
-// @iconURL     https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png
+// @icon        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png
 // @updateURL   https://github.com/Sv443/BetterYTM%20Plugin%20Template.meta.js
 // @resource    icon_1000 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_1000x1000.png
 // @resource    icon_128 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png
