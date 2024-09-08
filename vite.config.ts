@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
           name: userscriptName,
           namespace,
           version,
+          // necessary to make sure the plugin is registered in time and can make proper use of all API features:
           "run-at": "document-start",
           author: author.name,
           connect: [
@@ -60,13 +61,21 @@ export default defineConfig(({ mode }) => {
           description: "This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM",
           homepageURL: homepage,
           grant: [
+            // these are commonly used - add or remove as needed:
             "unsafeWindow",
+            "GM.getResourceURL",
+            "GM.getResourceText",
+            "GM.setValue",
+            "GM.getValue",
+            "GM.deleteValue",
+            "GM.openInTab",
           ],
           match: [
             "https://youtube.com/*",
             "https://music.youtube.com/*",
           ],
           iconURL: getResourceUrl(mode, "assets/plugin_icon_128x128.png"),
+          // since the .meta.js is not committed, updating via that URL is not possible
           updateURL: undefined,
           resource: [
             ["icon_1000", getResourceUrl(mode, "assets/plugin_icon_1000x1000.png")],
