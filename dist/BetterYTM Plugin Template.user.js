@@ -11,6 +11,12 @@
 // @description This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
 // @homepageURL https://github.com/Sv443/BetterYTM-Plugin-Template
 // @grant       unsafeWindow
+// @grant       GM.getResourceURL
+// @grant       GM.getResourceText
+// @grant       GM.setValue
+// @grant       GM.getValue
+// @grant       GM.deleteValue
+// @grant       GM.openInTab
 // @match       https://youtube.com/*
 // @match       https://music.youtube.com/*
 // @iconURL     https://raw.githubusercontent.com/Sv443/main/assets/plugin_icon_128x128.png
