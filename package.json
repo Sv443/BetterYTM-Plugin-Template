@@ -1,0 +1,73 @@
+{
+  "name": "betterytm-plugin-template",
+  "userscriptName": "BetterYTM Plugin Template",
+  "description": "Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Sv443/BetterYTM-Plugin-Template",
+  "namespace": "https://github.com/Sv443/BetterYTM-Plugin-Template",
+  "license": "WTFPL",
+  "licenseUrl": "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/LICENSE.txt",
+  "author": {
+    "name": "Sv443",
+    "url": "https://github.com/Sv443"
+  },
+  "private": true,
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Sv443/BetterYTM-Plugin-Template/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sv443/BetterYTM-Plugin-Template.git"
+  },
+  "scripts": {
+    "dev": "concurrently \"nodemon --exec vite build --mode development\" \"pnpm run serve\"",
+    "build-dev": "vite build --watch --mode development",
+    "build": "vite build --watch --mode production",
+    "serve": "pnpm run node-ts ./src/tools/serve.ts",
+    "node-ts": "node --no-warnings=ExperimentalWarning --enable-source-maps --loader ts-node/esm",
+    "lint": "eslint ./src",
+    "format": "eslint --fix ./src"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src/**",
+      "assets/**",
+      "vite.config.ts",
+      ".env",
+      "changelog.md",
+      "package.json"
+    ],
+    "ext": "ts,mts,js,jsx,mjs,json,html,css,svg,png",
+    "ignore": [
+      "node_modules/**",
+      "dist/**"
+    ]
+  },
+  "dependencies": {
+    "@sv443-network/userutils": "^8.0.0",
+    "compare-versions": "^6.1.1",
+    "nanoevents": "^9.0.0",
+    "tslib": "^2.7.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.10.0",
+    "@types/express": "^4.17.21",
+    "@types/greasemonkey": "^4.0.7",
+    "@types/node": "^22.5.4",
+    "@typescript-eslint/eslint-plugin": "^8.4.0",
+    "@typescript-eslint/parser": "^8.4.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.10.0",
+    "express": "^4.19.2",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.1",
+    "vite-tsconfig-paths": "^5.0.1",
+    "vite-userscript-plugin": "^1.10.0"
+  }
+}
