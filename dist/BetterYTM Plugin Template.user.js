@@ -13,9 +13,10 @@
 // @grant       unsafeWindow
 // @match       https://youtube.com/*
 // @match       https://music.youtube.com/*
-// @resource    icon_1000 http://localhost:8767/assets/plugin_icon_1000x1000.png
-// @resource    icon_128 http://localhost:8767/assets/plugin_icon_128x128.png
+// @iconURL     https://raw.githubusercontent.com/Sv443/main/assets/plugin_icon_128x128.png
 // @updateURL   https://github.com/Sv443/BetterYTM%20Plugin%20Template.meta.js
+// @resource    icon_1000 https://raw.githubusercontent.com/Sv443/main/assets/plugin_icon_1000x1000.png
+// @resource    icon_128 https://raw.githubusercontent.com/Sv443/main/assets/plugin_icon_128x128.png
 // @downloadURL https://github.com/Sv443/BetterYTM%20Plugin%20Template.user.js
 // ==/UserScript==
 
@@ -58,9 +59,9 @@
     url: "git+https://github.com/Sv443/BetterYTM-Plugin-Template.git"
   };
   const scripts = {
-    dev: 'concurrently "nodemon --exec vite build --mode development" "pnpm run serve"',
-    "build-dev": "vite build --watch --mode development",
-    build: "vite build --watch --mode production",
+    dev: 'concurrently "nodemon --exec pnpm run build-dev" "pnpm run serve"',
+    "build-dev": "vite build --mode development",
+    build: "vite build --mode production",
     serve: "pnpm run node-ts ./src/tools/serve.ts",
     "node-ts": "node --no-warnings=ExperimentalWarning --enable-source-maps --loader ts-node/esm",
     lint: "eslint ./src",
@@ -145,8 +146,8 @@
         name: license,
         url: licenseUrl
       },
-      // If you have a logo, you can add it here (should *ideally* be square and between 48x48 and 128x128):
-      iconUrl: "https://picsum.photos/64/64"
+      // If you have a logo, you can add it here - it should *ideally* be square and between 48x48 and 128x128:
+      iconUrl: "https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png"
     }
     // If you have contributors defined in package.json, you can add them here:
     // contributors,
