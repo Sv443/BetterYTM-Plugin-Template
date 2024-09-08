@@ -41,6 +41,10 @@ export default defineConfig(({ mode }) => {
       TSConfigPathsPlugin(),
       UserscriptPlugin({
         entry: "src/index.ts",
+        esbuildTransformOptions: {
+          // the userscript can't be minified, because GreasyFork will reject it and because it is safer for the end user to have readable code
+          minify: false,
+        },
         header: {
           name: userscriptName,
           namespace,
@@ -62,6 +66,8 @@ export default defineConfig(({ mode }) => {
             "https://youtube.com/*",
             "https://music.youtube.com/*",
           ],
+          iconURL: getResourceUrl(mode, "assets/plugin_icon_128x128.png"),
+          updateURL: undefined,
           resource: [
             ["icon_1000", getResourceUrl(mode, "assets/plugin_icon_1000x1000.png")],
             ["icon_128", getResourceUrl(mode, "assets/plugin_icon_128x128.png")],
