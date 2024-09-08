@@ -1,16 +1,32 @@
 <div style="text-align: center;" align="center">
 
-<img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">  
-
-## BetterYTM Plugin Template
-[**Introduction**](#introduction) • [**Prerequisites**](#prerequisites) • [**Setup**](#setup) • [**Commands**](#commands) • [**License**](#license)
+<img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">
+<h2>BetterYTM Plugin Template</h2>
+<h4 style="margin-top: 0;">– compatible with BYTM v2.1.0 <sup><a href="https://github.com/Sv443/BetterYTM/pull/76" target="_blank">⧉</a></sup> –</h4>
 
 </div>
 <br>
 
+### Table of Contents:
+- [**Introduction**](#introduction)
+- [**Prerequisites**](#prerequisites)
+- [**Setup for local development**](#setup)
+- [**Inner Workings of this template**](#inner-workings)
+  - [File structure](#file-structure)
+  - [Tips and notes](#tips-and-notes)
+- [**Terminal commands**](#commands)
+- [**License**](#license)
+
+<br>
+
 ## Introduction:
-This template is perfect for anyone who wants to create a plugin for BetterYTM but doesn't want to deal with the hassle of setting up a development environment.
-It contains an example plugin that makes use of [BetterYTM's](https://github.com/Sv443/BetterYTM) existing API to further alter the behavior of YouTube and YouTube Music.  
+BetterYTM is a UserScript that enhances the YouTube and YouTube Music experience by adding features and fixing bugs. It has a plugin system that allows you to create your own plugins to further customize the experience and make use of its API.  
+This template is perfect for anyone who wants to create a plugin for BetterYTM but doesn't want to deal with the hassle of setting up a working development environment.  
+  
+BetterYTM (BYTM for short) is included as a Git submodule to ensure that both projects' versions stay compatible until you decide to update your plugin.  
+This also conveniently allows you to inspect BetterYTM's code for finding specific details about the API and even more conveniently, allows you to navigate through to the BYTM API by ctrl+clicking on imported members.  
+Just make sure to [read the plugin sublicense](https://github.com/Sv443/BetterYTM/blob/main/license-for-plugins.txt) to find out which parts you are allowed to include in your plugin's bundle in `dist/`.  
+If you only import with the `type` keyword (or without, when importing `enum`s), you should be fine.  
   
 The plugin will be built with [Vite](https://vitejs.dev/) and [pnpm](https://pnpm.io/) and written in [TypeScript](https://www.typescriptlang.org/) to provide a modern and lightning fast development experience.  
 You may also import plain JavaScript files (with the extension .mjs) if you prefer that instead.  
@@ -21,15 +37,22 @@ The extension will keep updating the userscript automatically when any changes a
 Configure this behavior in the `nodemonConfig` object in `package.json`.  
   
 The library [UserUtils](https://github.com/Sv443-Network/UserUtils) is also included to provide a plethora of useful functions and classes for UserScripts.  
-I highly recommend checking it out! It is included on BetterYTM's API via `unsafeWindow.BYTM.UserUtils`.
+I highly recommend checking it out! It is included on the BYTM API via `unsafeWindow.BYTM.UserUtils`.  
+  
+Lastly, if your plugin is published, send me a quick [E-Mail](https://sv443.net/) or message on [Discord](https://dc.sv443.net/) so I can add it to the [BetterYTM Plugin List.](https://github.com/Sv443/BetterYTM#plugins)  
+You can also contact me for questions and help or to request features to be exposed on the API.  
+  
+Have fun creating your plugin!
 
 <br>
 
 ## Prerequisites
-- Read the [BetterYTM Contributing Guide here](https://github.com/Sv443/BetterYTM/blob/main/contributing.md) (or the latest in-dev version [here](https://github.com/Sv443/BetterYTM/blob/develop/contributing.md)).  
-  It contains all the information you need to know about the BetterYTM API and how to create a plugin.
-- Basic knowledge of writing UserScripts with TypeScript.
-- A powerful IDE like [VS Code](https://code.visualstudio.com/) to be able to inspect TS types and get auto-completion for the BYTM API.
+- Reading the [BetterYTM Contributing Guide](https://github.com/Sv443/BetterYTM/blob/main/contributing.md) (or the latest in-dev version [here](https://github.com/Sv443/BetterYTM/blob/develop/contributing.md)).  
+  It contains all the information you need to know about the BYTM API and how to create a plugin.
+- Having basic knowledge of writing UserScripts with JavaScript and ideally also having basic TypeScript knowledge.
+- Installing a powerful IDE like [VS Code](https://code.visualstudio.com/) to get extension recommendations, be able to inspect TS types and BYTM-internal code and to get auto-completion for the members of the BYTM API.
+- Reading this whole document to understand how to set up and use this template correctly.
+- Reading the [BetterYTM plugin sublicense](https://github.com/Sv443/BetterYTM/blob/main/license-for-plugins.txt)
 
 <br>
 
@@ -37,25 +60,95 @@ I highly recommend checking it out! It is included on BetterYTM's API via `unsaf
 1. [Create a repository based on this template.](https://github.com/Sv443/BetterYTM-Plugin-Template/generate)
 2. Clone the repository to your local machine.
 3. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.
-4. Install BetterYTM from the [releases page.](https://github.com/Sv443/BetterYTM/releases)  
+4. Copy `.env.template` to `.env` and modify it to your needs.
+5. Install BetterYTM from the [releases page.](https://github.com/Sv443/BetterYTM/releases)  
   If you wanna prepare your code for the latest version that's still in development, check out the latest [pull request](https://github.com/Sv443/BetterYTM/pulls) for the download and changelog.
-5. Make sure Node.js and [pnpm](https://pnpm.io/) are installed.
-6. Open a terminal in the project root and run `pnpm i` to install dependencies.
-7. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
+6. Make sure Node.js and [pnpm](https://pnpm.io/) are installed.
+7. Open a terminal in the project root and run `pnpm i` to install dependencies.
+8. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
   Open this URL with your UserScript manager extension to easily test the plugin.  
   I recommend using [Violentmonkey](https://violentmonkey.github.io/), which will automatically update the userscript when any changes are made.
 
+Refer to the [commands section](#commands) for more information on the available commands.
+
 <br>
 
+## Inner Workings:
+### File structure:
+- The `src/` folder contains the source code of the plugin.  
+  - `index.ts` is the main file that will be compiled into the userscript. In there, hook all the functions you want to run when the plugin is loaded.
+  - `logging.ts` has shorthand functions for logging stuff to the console. This has the benefit of adding a common prefix to all log messages and in here you can hook your own functions to improve the logging system.
+  - `plugin.ts` contains the plugin definition object, the plugin registration logic and constants exposed by the registration (token and event emitter instance).
+  - `types.ts` makes sure that the BYTM API is available in your code by providing its global types.  
+    If you need more global events, you will need to manually enter them in the `interface WindowEventMap` by following the format of the other entries and cross-referencing the BYTM API documentation.
+  - `example/` contains example code to show you how to interact with the BYTM API.
+- The `assets/` folder contains all the assets that are used in the plugin, think image, audio, video files, HTML, CSS, markdown, whatever.  
+  These assets can be linked to a `@resource` directive by editing the `vite.config.ts` file, where you can then use `GM.getResourceUrl()` to get the URL of the asset, which you can then `fetch()` or point to in an img, video, audio, etc. tag.
+- The `bytm` folder contains BetterYTM's entire repository as a submodule.  
+  The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
+  `main` is the latest release version, `develop` is the latest in-dev version.  
+  I recommend you read up on Git submodules to understand how they work and how to update them.  
+  This folder is also where you can find the BYTM API documentation and inspect the code to find out how to use the API.  
+  You can also quickly navigate through the BYTM API's internal code via ctrl+clicking.
+- In the `dist/` folder, the final build of your userscript will be created by vite.  
+  This is the file you will want to publish on platforms like GitHub, GreasyFork, OpenUserJS or your own website.
+- The root folder of the project contains the following:
+  - `.env.template` is an example file for an environment configuration.  
+    Copy the file to `.env` and modify it to your needs to change the behavior of the build process.
+  - `.gitmodules` contains the submodule configuration, where the BetterYTM repository is linked. Only modify this via terminal commands.
+  - `changelog.md` documents all changes between your plugin's versions. It is recommended to keep this up to date.
+  - `eslint.config.mjs` contains the ESLint configuration in the new v9 format. Feel free to modify this to your liking.  
+    The default settings include 2-space indentation, double quotes, trailing commas, and a few other settings.
+  - `package.json` is the single source of truth for lots of your plugin's metadata, like the name, version, description, etc.  
+    Make sure to update this file to match your plugin's details.
+  - `tsconfig.json` contains the TypeScript configuration. Feel free to modify this to your needs.
+  - `vite.config.ts` contains the Vite build configuration. This is where your userscript metadata and some default values are defined.
+
+<br>
+
+### Tips and Notes:
+- The TS file imports you encounter will end in `.js`. This is deliberate, because it is the latest ES module format.  
+  Just think of it as if you are trying to import the file that will exist *after* TypeScript has compiled it.  
+  JSON imports also have the extended syntax `with { type: "json" }`, which too is the latest ES module standard.
+- You should publish your userscript on at least one (but ideally all) of the following platforms:
+  - GitHub
+  - [GreasyFork](https://greasyfork.org/)
+  - [OpenUserJS](https://openuserjs.org/)
+  - Your own website
+- Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM and UserUtils in the readme or in a console.log() that is always logged on each page load.
+- If you're using VS Code, you can add the following to your `User Settings (JSON)` to automatically format your code on manual saves:  
+  ```json
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
+  ```
+  Alternatively if you want a keybind for this, make sure the extension `dbaeumer.vscode-eslint` is installed and bind the `ESLint: Fix all auto-fixable Problems` command to a hotkey (press F1, enter the command name, click the gear icon on it).
+
+<br>
+
+dev
+build-dev
+build
+serve
+node-ts
+lint
+format
+
 ## Commands
-- `pnpm run dev` - Builds the plugin and hosts it on a local server for testing.  
-  The default URL is `http://localhost:8767/BetterYTM%20Plugin%20Template.user.js` (change the port in `.env` and file name in `package.json`).  
-  This will also watch for changes and automatically rebuild the plugin.
+- `pnpm run dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
+  This will also watch for changes and automatically rebuild the plugin, so the browser extension may automatically refresh it too.  
+  The default URL is `http://localhost:8767/BetterYTM%20Plugin%20Template.user.js` (reflects the `userscriptName` in `package.json`).
 - `pnpm run build` - Builds the plugin for production into the `dist` folder.  
   This should be committed for easy inspection and universal installation. This then also allows you to easily permalink to every version's code for users to install.
+- `pnpm run build-dev` - Builds the plugin for development into the `dist` folder.  
+  By default this only changes where assets are served from, but you can add your own tweaks in `vite.config.ts`.
+- `pnpm run serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
+  This is useful for development and testing purposes.  
+  Use `--port=n` to specify a different port (8767 by default) and `--auto-exit-time=n` to auto-shutdown the server after n seconds.
 - `pnpm run lint` - Lints the code with ESLint.  
   Feel free to modify the config at `.eslint.config.mjs` to your liking.
 - `pnpm run format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
+- `pnpm run node-ts path/to/file.ts` - Runs the given TS file using the normal Node.js binary and the ts-node ESM loader. This is basically like running `node file.js` but with TypeScript & ESM and it allows you to use arguments intrinsic to Node.
 
 <br>
 
