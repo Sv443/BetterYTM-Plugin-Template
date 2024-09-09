@@ -4,7 +4,7 @@
   "description": "Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.",
   "version": "0.1.0",
   "homepage": "https://github.com/Sv443/BetterYTM-Plugin-Template",
-  "namespace": "https://github.com/Sv443/BetterYTM-Plugin-Template",
+  "namespace": "https://github.com/Sv443",
   "license": "WTFPL",
   "licenseUrl": "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/LICENSE.txt",
   "author": {
