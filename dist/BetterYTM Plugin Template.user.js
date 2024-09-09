@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        BetterYTM Plugin Template
-// @namespace   https://github.com/Sv443/BetterYTM-Plugin-Template
+// @namespace   https://github.com/Sv443
 // @version     0.1.0
 // @run-at      document-start
 // @author      Sv443
@@ -50,7 +50,7 @@
   const description = "Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.";
   const version = "0.1.0";
   const homepage = "https://github.com/Sv443/BetterYTM-Plugin-Template";
-  const namespace = "https://github.com/Sv443/BetterYTM-Plugin-Template";
+  const namespace = "https://github.com/Sv443";
   const license = "WTFPL";
   const licenseUrl = "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/LICENSE.txt";
   const author = {
@@ -161,11 +161,11 @@
   };
   let events;
   let token;
-  async function tryRegisterPlugin({ detail: registerPlugin }) {
+  function tryRegisterPlugin({ detail: registerPlugin }) {
     const res = registerPlugin(pluginDef);
     events = res.events;
     token = res.token;
-    await events.once("pluginRegistered");
+    return events.once("pluginRegistered");
   }
   const consPrefix = `[${packageJson.userscriptName}]`;
   function log(...args) {
