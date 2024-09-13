@@ -116,23 +116,16 @@ Refer to the [commands section](#commands) for more information on the available
   - [OpenUserJS](https://openuserjs.org/)
   - Your own website
 - Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM and UserUtils in the readme or in a console.log() that is always logged on each page load.
-- If you're using VS Code, you can add the following to your `User Settings (JSON)` to automatically format your code on manual saves:  
+- If you're using VS Code, for showing linter errors and to get automatic code formatting you can install the extension `dbaeumer.vscode-eslint`.  
+  Then you can add the following to your `User Settings (JSON)` to automatically format your code on manual saves:  
   ```json
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
   },
   ```
-  Alternatively if you want a keybind for this, make sure the extension `dbaeumer.vscode-eslint` is installed and bind the `ESLint: Fix all auto-fixable Problems` command to a hotkey (press F1, enter the command name, click the gear icon on it).
+  Alternatively if you want a keybind for this, bind the `ESLint: Fix all auto-fixable Problems` command to a hotkey (press F1, enter the command name, click the gear icon on it).
 
 <br>
-
-dev
-build-dev
-build
-serve
-node-ts
-lint
-format
 
 ## Commands
 - `pnpm run dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
