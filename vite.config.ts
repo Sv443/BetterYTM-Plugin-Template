@@ -1,9 +1,9 @@
 import "dotenv/config";
 import { defineConfig, Plugin } from "vite";
+import { execSync } from "child_process";
 import UserscriptPlugin from "vite-userscript-plugin";
 import TSConfigPathsPlugin from "vite-tsconfig-paths";
 import packageJson from "./package.json" with { type: "json" };
-import { execSync } from "child_process";
 
 const { author, homepage, namespace, repository, userscriptName, version } = packageJson;
 
@@ -45,7 +45,7 @@ export default defineConfig(({ mode }) => {
       UserscriptPlugin({
         entry: "src/index.ts",
         esbuildTransformOptions: {
-          // the userscript can't be minified, because GreasyFork will reject it and because it is safer for the end user to have readable code
+          // the userscript can't be minified, because GreasyFork will reject it and because it is safer for the end user to have readable code:
           minify: false,
         },
         header: {
@@ -63,15 +63,16 @@ export default defineConfig(({ mode }) => {
           copyright: `Copyright ${new Date().getFullYear()} ${author.name}`,
           description: "This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM",
           homepageURL: homepage,
+          supportURL: packageJson.bugs.url,
           grant: [
+            "unsafeWindow", // necessary for interacting with the BYTM API
             // these are commonly used - add or remove as needed:
-            "unsafeWindow",
-            "GM.getResourceURL",
-            "GM.getResourceText",
-            "GM.setValue",
-            "GM.getValue",
-            "GM.deleteValue",
-            "GM.openInTab",
+            // "GM.getResourceURL",
+            // "GM.getResourceText",
+            // "GM.setValue",
+            // "GM.getValue",
+            // "GM.deleteValue",
+            // "GM.openInTab",
           ],
           // don't run in iframes:
           noframes: true,
