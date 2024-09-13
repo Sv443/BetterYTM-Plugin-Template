@@ -1,4 +1,4 @@
-import packageJson from "../package.json" with { type: "json" };
+import packageJson from "@root/package.json" with { type: "json" };
 
 /** Common prefix to be able to tell logged messages apart and filter them in devtools */
 const consPrefix = `[${packageJson.userscriptName}]`;

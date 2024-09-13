@@ -1,5 +1,5 @@
-import { log } from "@/logging.js";
-import { token } from "@/plugin.js";
+import { log } from "@utils/logging.js";
+import { token } from "@utils/plugin.js";
 import { LogLevel } from "@bytm/src/types.js";
 
 export async function exampleMainEntrypoint() {

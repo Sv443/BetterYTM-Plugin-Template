@@ -29,8 +29,10 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "paths": {
-      "@/*": ["src/*"],
       "@bytm/*": ["bytm/*"],
+      "@utils/*": ["src/utils/*"],
+      "@root/*": ["*"],
+      "@/*": ["src/*"],
     },
   },
   "include": [

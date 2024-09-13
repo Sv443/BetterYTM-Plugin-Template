@@ -1,15 +1,27 @@
 {
-  "javascript.preferences.importModuleSpecifier": "relative",
-  "typescript.tsdk": "node_modules/typescript/lib",
+  // use 2 spaces for indentation (applies to newly created files)
+  "editor.tabSize": 2,
 
+  // use pnpm as package manager for the npm extension
+  "npm.packageManager": "pnpm",
+
+  // use the installed version of TS instead of the global one
+  "typescript.tsdk": "node_modules/typescript/lib",
+  // always prefer the @-paths from tsconfig.json
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  // use NodeNext's .js for all imports
+  "typescript.preferences.importModuleSpecifierEnding": "js",
+
+  // exclude built files from search
   "search.exclude": {
     "**/*.user.js": true,
   },
+
+  // associate .env and .env.template files with the same language identifier
   "files.associations": {
     "*.env": "dotenv",
     "*.env.template": "dotenv",
   },
-  "editor.tabSize": 2,
 
   // requires extension: fabiospampinato.vscode-highlight
   "highlight.regexes": {

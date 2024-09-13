@@ -1,5 +1,5 @@
 import { PluginIntent, type PluginDef, type PluginRegisterResult } from "@bytm/src/types.js";
-import { bugs, description, homepage, license, licenseUrl, namespace, userscriptName, version } from "../package.json" with { type: "json" };
+import { bugs, description, homepage, license, licenseUrl, namespace, userscriptName, version } from "@root/package.json" with { type: "json" };
 
 // #region pluginDef
 /** This object contains all the metadata of your plugin that is used by BetterYTM to display information about your plugin */

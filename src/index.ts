@@ -1,5 +1,6 @@
-import { events, tryRegisterPlugin } from "@/plugin.js";
-import { log } from "@/logging.js";
+import { events, tryRegisterPlugin } from "@utils/plugin.js";
+import { log } from "@utils/logging.js";
+import { buildNumber, buildMode } from "@utils/constants.js";
 import { examplePreInit } from "@/example/preInit.js";
 import { exampleMainEntrypoint } from "@/example/main.js";
 import { someJsdocFunction, somePlainFunction } from "@/example/plainJs.mjs";
@@ -15,7 +16,7 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (registerPlugin) => {
     try {
       // Register the plugin with BetterYTM to be able to call authenticated API functions:
       await tryRegisterPlugin(registerPlugin);
-      log(`Registered plugin successfully!\nUsing the BetterYTM API v${unsafeWindow.BYTM.version}`);
+      log(`Registered plugin successfully!\nUsing the BetterYTM API v${unsafeWindow.BYTM.version}\nPlugin build number: ${buildNumber} (${buildMode} mode)`);
     }
     catch(err) {
       console.error("Couldn't register plugin:", err);
