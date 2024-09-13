@@ -20,10 +20,10 @@
 // @noframes    
 // @match       https://youtube.com/*
 // @match       https://music.youtube.com/*
-// @icon        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png
+// @icon        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_128x128.png
+// @resource    icon_1000 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_1000x1000.png
+// @resource    icon_128 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_128x128.png
 // @updateURL   https://github.com/Sv443/BetterYTM%20Plugin%20Template.meta.js
-// @resource    icon_1000 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_1000x1000.png
-// @resource    icon_128 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png
 // @downloadURL https://github.com/Sv443/BetterYTM%20Plugin%20Template.user.js
 // ==/UserScript==
 
@@ -171,6 +171,10 @@
   function log(...args) {
     console.log(consPrefix, ...args);
   }
+  const buildModeRaw = "production";
+  const buildNumberRaw = "d88890d";
+  const buildMode = buildModeRaw.startsWith("#{{") ? "BUILD_ERROR" : buildModeRaw;
+  const buildNumber = buildNumberRaw.startsWith("#{{") ? "BUILD_ERROR" : buildNumberRaw;
   function examplePreInit() {
     unsafeWindow.BYTM.UserUtils.interceptWindowEvent("beforeunload", () => true);
   }
@@ -231,7 +235,8 @@ tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path 
       try {
         await tryRegisterPlugin(registerPlugin);
         log(`Registered plugin successfully!
-Using the BetterYTM API v${unsafeWindow.BYTM.version}`);
+Using the BetterYTM API v${unsafeWindow.BYTM.version}
+Plugin build number: ${buildNumber} (${buildMode} mode)`);
       } catch (err) {
         console.error("Couldn't register plugin:", err);
       }
