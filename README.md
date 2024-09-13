@@ -75,16 +75,20 @@ Refer to the [commands section](#commands) for more information on the available
 
 ## Inner Workings:
 ### File structure:
-- The `src/` folder contains the source code of the plugin.  
+- The `src/` folder contains the source code of the plugin (import prefix: `@/`).
   - `index.ts` is the main file that will be compiled into the userscript. In there, hook all the functions you want to run when the plugin is loaded.
-  - `logging.ts` has shorthand functions for logging stuff to the console. This has the benefit of adding a common prefix to all log messages and in here you can hook your own functions to improve the logging system.
-  - `plugin.ts` contains the plugin definition object, the plugin registration logic and constants exposed by the registration (token and event emitter instance).
   - `types.ts` makes sure that the BYTM API is available in your code by providing its global types.  
     If you need more global events, you will need to manually enter them in the `interface WindowEventMap` by following the format of the other entries and cross-referencing the BYTM API documentation.
   - `example/` contains example code to show you how to interact with the BYTM API.
+  - `utils/` contains utility functions for better organization of your code (import prefix: `@utils/`).
+    - `constants.ts` contains constants that are used throughout the plugin.  
+      The example values that are in there (build mode and number) are inserted by the custom vite plugin in `vite.config.ts`.  
+      You can add your own constants in there and use them throughout your code as a single source of truth.
+    - `logging.ts` has shorthand functions for logging stuff to the console. This has the benefit of adding a common prefix to all log messages and in here you can hook your own functions to improve the logging system.
+    - `plugin.ts` contains the plugin definition object, the plugin registration logic and constants exposed by the registration (token and event emitter instance).
 - The `assets/` folder contains all the assets that are used in the plugin, think image, audio, video files, HTML, CSS, markdown, whatever.  
   These assets can be linked to a `@resource` directive by editing the `vite.config.ts` file, where you can then use `GM.getResourceUrl()` to get the URL of the asset, which you can then `fetch()` or point to in an img, video, audio, etc. tag.
-- The `bytm` folder contains BetterYTM's entire repository as a submodule.  
+- The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  
   I recommend you read up on Git submodules to understand how they work and how to update them.  
@@ -92,7 +96,7 @@ Refer to the [commands section](#commands) for more information on the available
   You can also quickly navigate through the BYTM API's internal code via ctrl+clicking.
 - In the `dist/` folder, the final build of your userscript will be created by vite.  
   This is the file you will want to publish on platforms like GitHub, GreasyFork, OpenUserJS or your own website.
-- The root folder of the project contains the following:
+- The root folder of the project (import prefix: `@root/`) contains the following:
   - `.env.template` is an example file for an environment configuration.  
     Copy the file to `.env` and modify it to your needs to change the behavior of the build process.
   - `.gitmodules` contains the submodule configuration, where the BetterYTM repository is linked. Only modify this via terminal commands.
@@ -107,15 +111,16 @@ Refer to the [commands section](#commands) for more information on the available
 <br>
 
 ### Tips and Notes:
-- The TS file imports you encounter will end in `.js`. This is deliberate, because it is the latest ES module format.  
-  Just think of it as if you are trying to import the file that will exist *after* TypeScript has compiled it.  
-  JSON imports also have the extended syntax `with { type: "json" }`, which too is the latest ES module standard.
+- The TS file imports you encounter will end in `.js`. This is deliberate, because it is the latest ES module format. Just think of it as if you are trying to import the file that will exist *after* TypeScript has compiled it.  
+  If you are using VS Code, the IntelliSense imports will automatically follow this format (configured in `.vscode/settings.json`).  
+  - All file imports use prefixed paths (starting with `@`), which are defined in the `tsconfig.json` file.
+  - JSON imports also have the extended syntax `with { type: "json" }`, which too is the latest ES module standard.
 - You should publish your userscript on at least one (but ideally all) of the following platforms:
   - GitHub
   - [GreasyFork](https://greasyfork.org/)
   - [OpenUserJS](https://openuserjs.org/)
   - Your own website
-- Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM and UserUtils in the readme or in a console.log() that is always logged on each page load.
+- Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM and UserUtils in the readme or in a `console.log()` that is called on each page load.
 - If you're using VS Code, for showing linter errors and to get automatic code formatting you can install the extension `dbaeumer.vscode-eslint`.  
   Then you can add the following to your `User Settings (JSON)` to automatically format your code on manual saves:  
   ```json
