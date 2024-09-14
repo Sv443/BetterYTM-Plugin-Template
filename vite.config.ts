@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { defineConfig, Plugin } from "vite";
 import { execSync } from "child_process";
-import UserscriptPlugin from "vite-userscript-plugin";
-import TSConfigPathsPlugin from "vite-tsconfig-paths";
+import tsConfigPathsPlugin from "vite-tsconfig-paths";
+import monkeyPlugin from "vite-plugin-monkey";
 import packageJson from "./package.json" with { type: "json" };
 
 const { author, homepage, namespace, repository, userscriptName, version } = packageJson;
@@ -41,14 +41,16 @@ export default defineConfig(({ mode }) => {
       minify: false,
     },
     plugins: [
-      TSConfigPathsPlugin(),
-      UserscriptPlugin({
+      tsConfigPathsPlugin({
+        root: import.meta.dirname,
+      }),
+      replaceStringsPlugin({
+        "#{{BUILD_MODE}}": mode,
+        "#{{BUILD_NUMBER}}": buildNbr,
+      }),
+      monkeyPlugin({
         entry: "src/index.ts",
-        esbuildTransformOptions: {
-          // the userscript can't be minified, because GreasyFork will reject it and because it is safer for the end user to have readable code:
-          minify: false,
-        },
-        header: {
+        userscript: {
           name: userscriptName,
           namespace,
           version,
@@ -81,15 +83,11 @@ export default defineConfig(({ mode }) => {
             "https://music.youtube.com/*",
           ],
           icon: getResourceUrl(mode, "assets/plugin_icon_128x128.png", buildNbr),
-          resource: [
-            ["icon_1000", getResourceUrl(mode, "assets/plugin_icon_1000x1000.png", buildNbr)],
-            ["icon_128", getResourceUrl(mode, "assets/plugin_icon_128x128.png", buildNbr)],
-          ]
+          resource: {
+            icon_1000: getResourceUrl(mode, "assets/plugin_icon_1000x1000.png", buildNbr),
+            icon_128: getResourceUrl(mode, "assets/plugin_icon_128x128.png", buildNbr),
+          },
         },
-      }),
-      replaceStringsPlugin({
-        "#{{BUILD_MODE}}": mode,
-        "#{{BUILD_NUMBER}}": buildNbr,
       }),
     ],
   };
