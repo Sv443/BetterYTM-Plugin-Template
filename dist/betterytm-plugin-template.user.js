@@ -6,17 +6,17 @@
 // @description  This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
 // @license      WTFPL
 // @copyright    Copyright 2024 Sv443
-// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_128x128.png
+// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_128x128.png
 // @homepage     https://github.com/Sv443/BetterYTM-Plugin-Template
 // @homepageURL  https://github.com/Sv443/BetterYTM-Plugin-Template
 // @source       https://github.com/Sv443/BetterYTM-Plugin-Template.git
 // @supportURL   https://github.com/Sv443/BetterYTM-Plugin-Template/issues
 // @match        https://youtube.com/*
 // @match        https://music.youtube.com/*
-// @resource     doc_changelog   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/changelog.md
-// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_1000x1000.png
-// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_128x128.png
-// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/resourceExample.js#sha256=2pnooQQ8m6WU1xPIgSJ4bI4ilHjIWg/BxaPX7eIshS0=
+// @resource     doc_changelog   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/changelog.md
+// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_1000x1000.png
+// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_128x128.png
+// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/resourceExample.js#sha256=2pnooQQ8m6WU1xPIgSJ4bI4ilHjIWg/BxaPX7eIshS0=
 // @connect      i.ytimg.com
 // @connect      youtube.com
 // @connect      github.com
@@ -90,7 +90,7 @@
     ]
   };
   const dependencies = {
-    "@sv443-network/userutils": "^8.0.0",
+    "@sv443-network/userutils": "^8.0.2",
     "compare-versions": "^6.1.1",
     nanoevents: "^9.0.0",
     tslib: "^2.7.0"
@@ -172,7 +172,7 @@
     console.log(consPrefix, ...args);
   }
   const buildModeRaw = "production";
-  const buildNumberRaw = "ddc72d0";
+  const buildNumberRaw = "3733fcf";
   const buildMode = buildModeRaw.startsWith("#{{") ? "BUILD_ERROR" : buildModeRaw;
   const buildNumber = buildNumberRaw.startsWith("#{{") ? "BUILD_ERROR" : buildNumberRaw;
   function examplePreInit() {
