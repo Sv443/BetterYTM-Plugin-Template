@@ -39,8 +39,9 @@ Configure this behavior in the `nodemonConfig` object in `package.json`.
 The library [UserUtils](https://github.com/Sv443-Network/UserUtils) is also included to provide a plethora of useful functions and classes for UserScripts.  
 I highly recommend checking it out! It is included on the BYTM API via `unsafeWindow.BYTM.UserUtils`.  
   
-Lastly, if your plugin is published, send me a quick [E-Mail](https://sv443.net/) or message on [Discord](https://dc.sv443.net/) so I can add it to the [BetterYTM Plugin List.](https://github.com/Sv443/BetterYTM#plugins)  
-You can also contact me for questions and help or to request features to be exposed on the API.  
+> [!NOTE]  
+> If your plugin is published, send me a quick [E-Mail](https://sv443.net/) or message on [Discord](https://dc.sv443.net/) so I can add it to the [BetterYTM Plugin List.](https://github.com/Sv443/BetterYTM#plugins)  
+> You can also contact me for questions and help or to request features to be exposed on the API.  
   
 Have fun creating your plugin!
 
@@ -75,6 +76,18 @@ Refer to the [commands section](#commands) for more information on the available
 
 ## Inner Workings:
 ### File structure:
+- The root folder of the project (import prefix: `@root/`) contains the following:
+  - `.env.template` is an example file for an environment configuration.  
+    Copy the file to `.env` and modify it to your needs to change the behavior of the build process.
+  - `.gitmodules` contains the submodule configuration, where the BetterYTM repository is linked. Only modify this via terminal commands.
+  - `changelog.md` documents all changes between your plugin's versions. It is recommended to keep this up to date.
+  - `eslint.config.mjs` contains the ESLint configuration in the new v9 format. Feel free to modify this to your liking.  
+    The default settings include 2-space indentation, double quotes, trailing commas, and a few other settings.
+  - `package.json` is the single source of truth for lots of your plugin's metadata, like the name, version, description, etc.  
+    Make sure to update this file to match your plugin's details.
+  - `tsconfig.json` contains the TypeScript configuration. Feel free to modify this to your needs.
+  - `vite.config.ts` contains the Vite build configuration. This is where your userscript metadata and some default values are defined.  
+    It is also where resources are parsed, the SRI hash is calculated and where you can add your own tweaks to the build process.
 - The `src/` folder contains the source code of the plugin (import prefix: `@/`).
   - `index.ts` is the main file that will be compiled into the userscript. In there, hook all the functions you want to run when the plugin is loaded.
   - `types.ts` makes sure that the BYTM API is available in your code by providing its global types.  
@@ -88,6 +101,10 @@ Refer to the [commands section](#commands) for more information on the available
     - `plugin.ts` contains the plugin definition object, the plugin registration logic and constants exposed by the registration (token and event emitter instance).
 - The `assets/` folder contains all the assets that are used in the plugin, think image, audio, video files, HTML, CSS, markdown, whatever.  
   These assets can be linked to a `@resource` directive by editing the `vite.config.ts` file, where you can then use `GM.getResourceUrl()` to get the URL of the asset, which you can then `fetch()` or point to in an img, video, audio, etc. tag.
+  - `resources.json` is where you define the `@resource` directives for your plugin, which can then be fetched with `GM.getResourceUrl()` and `GM.getResourceText()`.  
+    The keys of this object are the identifiers you use to fetch the resources and the values are the paths to the resources, or an options object.  
+    If a string path is given and it starts with a slash, it will be resolved relative to the root of the project, otherwise relative to the `assets/` folder.  
+    If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which can be set to `true` to automatically calculate the SRI hash for the asset and append it to the URL in the metadata block.
 - The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  
@@ -96,17 +113,6 @@ Refer to the [commands section](#commands) for more information on the available
   You can also quickly navigate through the BYTM API's internal code via ctrl+clicking.
 - In the `dist/` folder, the final build of your userscript will be created by vite.  
   This is the file you will want to publish on platforms like GitHub, GreasyFork, OpenUserJS or your own website.
-- The root folder of the project (import prefix: `@root/`) contains the following:
-  - `.env.template` is an example file for an environment configuration.  
-    Copy the file to `.env` and modify it to your needs to change the behavior of the build process.
-  - `.gitmodules` contains the submodule configuration, where the BetterYTM repository is linked. Only modify this via terminal commands.
-  - `changelog.md` documents all changes between your plugin's versions. It is recommended to keep this up to date.
-  - `eslint.config.mjs` contains the ESLint configuration in the new v9 format. Feel free to modify this to your liking.  
-    The default settings include 2-space indentation, double quotes, trailing commas, and a few other settings.
-  - `package.json` is the single source of truth for lots of your plugin's metadata, like the name, version, description, etc.  
-    Make sure to update this file to match your plugin's details.
-  - `tsconfig.json` contains the TypeScript configuration. Feel free to modify this to your needs.
-  - `vite.config.ts` contains the Vite build configuration. This is where your userscript metadata and some default values are defined.
 
 <br>
 
@@ -120,6 +126,10 @@ Refer to the [commands section](#commands) for more information on the available
   - [GreasyFork](https://greasyfork.org/)
   - [OpenUserJS](https://openuserjs.org/)
   - Your own website
+- [Subresource Integrity](https://www.tampermonkey.net/documentation.php?locale=en#api:Subresource_Integrity) for `@resource` directives is supported out of the box by this template.  
+  This is to combat the risk of your externally loaded in assets being tampered with by a third party.  
+  If you set an asset's `integrity` property to `true` in `assets/resources.json`, the plugin will automatically calculate the SRI hash and add it to the asset's URL.  
+  Note that this means you will have to rebuild the plugin every time you change an asset that has SRI enabled.
 - Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM and UserUtils in the readme or in a `console.log()` that is called on each page load.
 - If you're using VS Code, for showing linter errors and to get automatic code formatting you can install the extension `dbaeumer.vscode-eslint`.  
   Then you can add the following to your `User Settings (JSON)` to automatically format your code on manual saves:  

@@ -37,7 +37,7 @@
   },
   "include": [
     "src/**/*",
-    "node_modules/vite-userscript-plugin/types/violentmonkey.d.ts",
+    "node_modules/vite-userscript-plugin/types/violentmonkey.d.ts", "assets/resourceExample.js",
   ],
   "exclude": [
     "node_modules/**/*",

@@ -1,0 +1,8 @@
+{
+  "icon_128": "icon_128.png",
+  "doc_changelog": "/changelog.md",
+  "script_example": {
+    "path": "resourceExample.js",
+    "integrity": true
+  }
+}
