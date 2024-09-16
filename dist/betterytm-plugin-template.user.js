@@ -6,18 +6,21 @@
 // @description  This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
 // @license      WTFPL
 // @copyright    Copyright 2024 Sv443
-// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_128x128.png
+// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_128x128.png
 // @homepage     https://github.com/Sv443/BetterYTM-Plugin-Template
 // @homepageURL  https://github.com/Sv443/BetterYTM-Plugin-Template
 // @source       https://github.com/Sv443/BetterYTM-Plugin-Template.git
 // @supportURL   https://github.com/Sv443/BetterYTM-Plugin-Template/issues
 // @match        https://youtube.com/*
 // @match        https://music.youtube.com/*
-// @resource     icon_1000  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_1000x1000.png
-// @resource     icon_128   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_128x128.png
+// @resource     doc_changelog   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/changelog.md
+// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_1000x1000.png
+// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/plugin_icon_128x128.png
+// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/ddc72d0/assets/resourceExample.js#sha256=2pnooQQ8m6WU1xPIgSJ4bI4ilHjIWg/BxaPX7eIshS0=
 // @connect      i.ytimg.com
 // @connect      youtube.com
 // @connect      github.com
+// @grant        GM.getResourceUrl
 // @grant        unsafeWindow
 // @run-at       document-start
 // @noframes
@@ -169,7 +172,7 @@
     console.log(consPrefix, ...args);
   }
   const buildModeRaw = "production";
-  const buildNumberRaw = "7925891";
+  const buildNumberRaw = "ddc72d0";
   const buildMode = buildModeRaw.startsWith("#{{") ? "BUILD_ERROR" : buildModeRaw;
   const buildNumber = buildNumberRaw.startsWith("#{{") ? "BUILD_ERROR" : buildNumberRaw;
   function examplePreInit() {
@@ -177,6 +180,7 @@
   }
   async function exampleMainEntrypoint() {
     const button = document.createElement("button");
+    button.id = "my-plugin-button";
     button.textContent = "Click me!";
     unsafeWindow.BYTM.addSelectorListener("playerBar", ".middle-controls-buttons", {
       listener: (btnsContainerElement) => btnsContainerElement.appendChild(button),
@@ -197,13 +201,13 @@
       if (confirmed) {
         const styleElem = unsafeWindow.BYTM.UserUtils.addGlobalStyle(
           `@keyframes rainbowfill {
-  0% { fill: #ff0000; }
+  0%      { fill: #ff0000; }
   16.666% { fill: #ff7f00; }
   33.333% { fill: #ffff00; }
-  50% { fill: #00ff00; }
+  50%     { fill: #00ff00; }
   66.666% { fill: #3535ff; }
   83.333% { fill: #7b23dd; }
-  100% { fill: #ff0000; }
+  100%    { fill: #ff0000; }
 }
 tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path {
   animation: rainbowfill 7s linear infinite;
@@ -216,6 +220,14 @@ tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path 
     if (features) {
       log("BYTM's locale is", features.locale);
       log("BYTM's log level is", features.logLevel, `(${LogLevel[features.logLevel]})`);
+    }
+    const exampleScript = await unsafeWindow.BYTM.UserUtils.fetchAdvanced(await GM.getResourceUrl("script_example"), {
+      timeout: 5e3
+    });
+    try {
+      eval(await exampleScript.text());
+    } catch (err) {
+      log("Failed to eval the fetched example script:", err);
     }
   }
   function someJsdocFunction(arg) {
