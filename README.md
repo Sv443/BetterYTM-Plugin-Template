@@ -137,7 +137,8 @@ Refer to the [commands section](#commands) for more information on the available
   This will also watch for changes and automatically rebuild the plugin, so the browser extension may automatically refresh it too.  
   The default URL is `http://localhost:8767/BetterYTM%20Plugin%20Template.user.js` (reflects the `userscriptName` in `package.json`).
 - `pnpm run build` - Builds the plugin for production into the `dist` folder.  
-  This should be committed for easy inspection and universal installation. This then also allows you to easily permalink to every version's code for users to install.
+  This should be committed for easy inspection and universal installation. This then also allows you to easily permalink to every version's code for users to install.  
+  ⚠️ Note: On Windows, this command might fail at resolving the aliased (@-prefixed) paths. This is a [known issue.](https://github.com/lisonge/vite-plugin-monkey/issues/186) In case you experience this, set up WSL2 and use that to build the plugin instead.
 - `pnpm run build-dev` - Builds the plugin for development into the `dist` folder.  
   By default this only changes where assets are served from, but you can add your own tweaks in `vite.config.ts`.
 - `pnpm run serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
