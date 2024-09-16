@@ -45,7 +45,7 @@
     ]
   },
   "dependencies": {
-    "@sv443-network/userutils": "^8.0.0",
+    "@sv443-network/userutils": "^8.0.2",
     "compare-versions": "^6.1.1",
     "nanoevents": "^9.0.0",
     "tslib": "^2.7.0"

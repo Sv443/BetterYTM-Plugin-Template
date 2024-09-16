@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@sv443-network/userutils':
-        specifier: ^8.0.0
-        version: 8.0.0
+        specifier: ^8.0.2
+        version: 8.0.2
       compare-versions:
         specifier: ^6.1.1
         version: 6.1.1
@@ -364,8 +364,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@sv443-network/userutils@8.0.0':
-    resolution: {integrity: sha512-QJOtorQY67TTlIaqQG3gLinw4uFooucv5HAJ8G7fg3bUY6QcKV8qHWzlaqCh+0fgysF/VSeU/sPrqUvsNxiE6g==}
+  '@sv443-network/userutils@8.0.2':
+    resolution: {integrity: sha512-rks7Y5MntQyA7oCKOsaYBGRpGcNX30UrX6MWoALnMdG2QYQlt/hIF0RUIgrOdjhwDBwSoEAOQTDzGpGaLMgitg==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -1711,7 +1711,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.21.2':
     optional: true
 
-  '@sv443-network/userutils@8.0.0':
+  '@sv443-network/userutils@8.0.2':
     dependencies:
       nanoevents: 9.0.0
 
