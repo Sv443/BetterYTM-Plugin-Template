@@ -1,5 +1,5 @@
 {
-  "icon_128": "icon_128.png",
+  "icon_128": "plugin_icon_128x128.png",
   "doc_changelog": "/changelog.md",
   "script_example": {
     "path": "resourceExample.js",
