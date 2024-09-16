@@ -1,11 +1,12 @@
 import "dotenv/config";
-import { defineConfig, Plugin } from "vite";
+import { defineConfig, normalizePath, Plugin } from "vite";
 import { execSync } from "child_process";
 import tsConfigPathsPlugin from "vite-tsconfig-paths";
 import monkeyPlugin from "vite-plugin-monkey";
 import packageJson from "./package.json" with { type: "json" };
 
 const { author, homepage, namespace, repository, userscriptName, version } = packageJson;
+const { argv, env, cwd } = process;
 
 /**
  * Default port of the dev server.  
@@ -21,8 +22,8 @@ export const defaultRepo = "Sv443/BetterYTM-Plugin-Template";
 
 const repo = repository.url.match(/github.com\/(.+?\/.+?)\//)?.[1] ?? defaultRepo;
 
-const cliPortRaw = Number(process.argv.find(arg => arg.startsWith("--port="))?.split("=")[1]);
-const envPortRaw = Number(process.env.DEV_SERVER_PORT);
+const cliPortRaw = Number(argv.find(arg => arg.startsWith("--port="))?.split("=")[1]);
+const envPortRaw = Number(env.DEV_SERVER_PORT);
 /** HTTP port of the dev server */
 const devServerPort = !isNaN(cliPortRaw)
   ? cliPortRaw
@@ -31,7 +32,6 @@ const devServerPort = !isNaN(cliPortRaw)
       ? envPortRaw
       : defaultPort
   );
-
 
 export default defineConfig(({ mode }) => {
   const buildNbr = getCommitSha();
@@ -49,7 +49,7 @@ export default defineConfig(({ mode }) => {
         "#{{BUILD_NUMBER}}": buildNbr,
       }),
       monkeyPlugin({
-        entry: "src/index.ts",
+        entry: normalizePath(`${cwd()}/src/index.ts`), // see https://github.com/lisonge/vite-plugin-monkey/issues/186#issuecomment-2353496972
         userscript: {
           name: userscriptName,
           namespace,

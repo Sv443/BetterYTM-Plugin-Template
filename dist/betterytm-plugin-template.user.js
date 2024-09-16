@@ -1,34 +1,31 @@
 // ==UserScript==
-// @name        BetterYTM Plugin Template
-// @namespace   https://github.com/Sv443
-// @version     0.1.0
-// @run-at      document-start
-// @author      Sv443
-// @connect     i.ytimg.com
-// @connect     youtube.com
-// @connect     github.com
-// @copyright   Copyright 2024 Sv443
-// @description This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
-// @homepageURL https://github.com/Sv443/BetterYTM-Plugin-Template
-// @grant       unsafeWindow
-// @grant       GM.getResourceURL
-// @grant       GM.getResourceText
-// @grant       GM.setValue
-// @grant       GM.getValue
-// @grant       GM.deleteValue
-// @grant       GM.openInTab
-// @noframes    
-// @match       https://youtube.com/*
-// @match       https://music.youtube.com/*
-// @icon        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_128x128.png
-// @resource    icon_1000 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_1000x1000.png
-// @resource    icon_128 https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/d88890d/assets/plugin_icon_128x128.png
-// @updateURL   https://github.com/Sv443/BetterYTM%20Plugin%20Template.meta.js
-// @downloadURL https://github.com/Sv443/BetterYTM%20Plugin%20Template.user.js
+// @name         BetterYTM Plugin Template
+// @namespace    https://github.com/Sv443
+// @version      0.1.0
+// @author       Sv443
+// @description  This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
+// @license      WTFPL
+// @copyright    Copyright 2024 Sv443
+// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_128x128.png
+// @homepage     https://github.com/Sv443/BetterYTM-Plugin-Template
+// @homepageURL  https://github.com/Sv443/BetterYTM-Plugin-Template
+// @source       https://github.com/Sv443/BetterYTM-Plugin-Template.git
+// @supportURL   https://github.com/Sv443/BetterYTM-Plugin-Template/issues
+// @match        https://youtube.com/*
+// @match        https://music.youtube.com/*
+// @resource     icon_1000  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_1000x1000.png
+// @resource     icon_128   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/7925891/assets/plugin_icon_128x128.png
+// @connect      i.ytimg.com
+// @connect      youtube.com
+// @connect      github.com
+// @grant        unsafeWindow
+// @run-at       document-start
+// @noframes
 // ==/UserScript==
 
-(function() {
-  "use strict";
+(function () {
+  'use strict';
+
   var LogLevel = /* @__PURE__ */ ((LogLevel2) => {
     LogLevel2[LogLevel2["Debug"] = 0] = "Debug";
     LogLevel2[LogLevel2["Info"] = 1] = "Info";
@@ -112,8 +109,8 @@
     "ts-node": "^10.9.2",
     typescript: "^5.5.3",
     vite: "^5.4.1",
-    "vite-tsconfig-paths": "^5.0.1",
-    "vite-userscript-plugin": "^1.10.0"
+    "vite-plugin-monkey": "^4.0.6",
+    "vite-tsconfig-paths": "^5.0.1"
   };
   const packageJson = {
     name,
@@ -172,7 +169,7 @@
     console.log(consPrefix, ...args);
   }
   const buildModeRaw = "production";
-  const buildNumberRaw = "d88890d";
+  const buildNumberRaw = "7925891";
   const buildMode = buildModeRaw.startsWith("#{{") ? "BUILD_ERROR" : buildModeRaw;
   const buildNumber = buildNumberRaw.startsWith("#{{") ? "BUILD_ERROR" : buildNumberRaw;
   function examplePreInit() {
@@ -254,4 +251,5 @@ Plugin build number: ${buildNumber} (${buildMode} mode)`);
   async function run() {
     await exampleMainEntrypoint();
   }
+
 })();
