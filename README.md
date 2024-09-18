@@ -82,7 +82,10 @@ Refer to the [commands section](#commands) for more information on the available
   - `.gitmodules` contains the submodule configuration, where the BetterYTM repository is linked. Only modify this via terminal commands.
   - `changelog.md` documents all changes between your plugin's versions. It is recommended to keep this up to date.
   - `eslint.config.mjs` contains the ESLint configuration in the new v9 format. Feel free to modify this to your liking.  
-    The default settings include 2-space indentation, double quotes, trailing commas, and a few other settings.
+    The default settings include 2-space indentation, double quotes, trailing commas, and more.  
+    Things to look out for:
+    - The rule `@typescript-eslint/no-empty-object-type` is turned off, which means you can use the type `{}`, but be careful since this *doesn't* mean "empty object" and is a [common pitfall](https://www.totaltypescript.com/the-empty-object-type-in-typescript)
+    - Unused function arguments will yield a warning, unless they start with an underscore
   - `package.json` is the single source of truth for lots of your plugin's metadata, like the name, version, description, etc.  
     Make sure to update this file to match your plugin's details.
   - `tsconfig.json` contains the TypeScript configuration. Feel free to modify this to your needs.
