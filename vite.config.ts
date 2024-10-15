@@ -72,7 +72,7 @@ export default defineConfig(async ({ mode }) => {
             "github.com",
           ],
           copyright: `Copyright ${new Date().getFullYear()} ${author.name}`,
-          description: "This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM",
+          description: packageJson.description,
           homepageURL: homepage,
           supportURL: packageJson.bugs.url,
           grant: [
