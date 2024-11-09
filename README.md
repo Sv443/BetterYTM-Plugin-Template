@@ -58,15 +58,16 @@ Have fun creating your plugin!
 <br>
 
 ## Setup
-1. [Create a repository based on this template.](https://github.com/Sv443/BetterYTM-Plugin-Template/generate)
-2. Clone the repository to your local machine.
-3. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.
-4. Copy `.env.template` to `.env` and modify it to your needs.
-5. Install BetterYTM from the [releases page.](https://github.com/Sv443/BetterYTM/releases)  
+1. Install Node.js (current version) and pnpm (with `npm i -g pnpm`)
+2. [Create a repository based on this template.](https://github.com/Sv443/BetterYTM-Plugin-Template/generate)
+3. Clone the repository to your local machine.
+4. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.
+5. Copy `.env.template` to `.env` and modify it to your needs.
+6. Install BetterYTM from the [releases page.](https://github.com/Sv443/BetterYTM/releases)  
   If you wanna prepare your code for the latest version that's still in development, check out the latest [pull request](https://github.com/Sv443/BetterYTM/pulls) for the download and changelog.
-6. Make sure Node.js and [pnpm](https://pnpm.io/) are installed.
-7. Open a terminal in the project root and run `pnpm i` to install dependencies.
-8. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
+7. Make sure Node.js and [pnpm](https://pnpm.io/) are installed.
+8. Open a terminal in the project root and run `pnpm i` to install dependencies.
+9. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
   Open this URL with your UserScript manager extension to easily test the plugin.  
   I recommend using [Violentmonkey](https://violentmonkey.github.io/), which will automatically update the userscript when any changes are made.
 
