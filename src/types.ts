@@ -6,7 +6,7 @@ declare global {
   }
 
   // Enter BYTM's custom events you need in here so they are available on the `window` object and typed correctly.
-  // When adding new events, you can basically copy them from `type InterfaceEvents` in `bytm/src/interface.ts`.
+  // When adding new events, you can basically copy them from `type InterfaceEvents` in `bytm/src/interface.ts` and wrapping them in `CustomEvent`:
   interface WindowEventMap {
     "bytm:registerPlugin": CustomEvent<(def: PluginDef) => PluginRegisterResult>;
   }

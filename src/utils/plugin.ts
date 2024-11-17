@@ -11,7 +11,7 @@ export const pluginDef: PluginDef = {
     name: userscriptName,
     namespace,
     description: {
-      en_US: description,
+      "en-US": description,
     },
     homepage: {
       source: homepage,
