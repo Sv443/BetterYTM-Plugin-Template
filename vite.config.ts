@@ -91,10 +91,10 @@ export default defineConfig(async ({ mode }) => {
             "https://youtube.com/*",
             "https://music.youtube.com/*",
           ],
-          icon: getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
+          icon: await getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
           resource: {
-            icon_1000: getResourceUrl(mode, "plugin_icon_1000x1000.png", buildNbr),
-            icon_128: getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
+            icon_1000: await getResourceUrl(mode, "plugin_icon_1000x1000.png", buildNbr),
+            icon_128: await getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
             ...resources,
           },
         },
@@ -143,10 +143,8 @@ async function getResources(mode: string, buildNbrOrBranch: string): Promise<Rec
   const resources: Record<string, string> = {};
   for(const [name, resource] of Object.entries(resourcesJson)) {
     const path = typeof resource === "string" ? resource : resource.path;
-    const hash = typeof resource === "object" && resource.integrity === true
-      ? `#sha256=${await calculateHash(path)}`
-      : "";
-    resources[name] = `${getResourceUrl(mode, path, buildNbrOrBranch)}${hash}`;
+    const integrity = typeof resource === "string" || typeof resource === "object" && (!("integrity" in resource) || resource.integrity === true);
+    resources[name] = `${await getResourceUrl(mode, path, buildNbrOrBranch, integrity)}`;
   }
   return resources;
 }
@@ -174,13 +172,15 @@ function calculateHash(path: string): Promise<string> {
  * @param mode `development` or `production`, defaults to `development`
  * @param path The path to the resource - if prefixed with a slash, it is relative to the repository root, otherwise it is relative to the `assets` directory.
  * @param buildNbrOrBranch The build number or branch name to use in the URL, defaults to `main` - this is very useful for versioned asset URLs, which will never break by changes made to the `main` branch.
+ * @param integrity Whether to append the hash of the file to the URL for [Subresource Integrity.](https://www.tampermonkey.net/documentation.php?locale=en#api:Subresource_Integrity)
  */
-function getResourceUrl(mode: string, path: string, buildNbrOrBranch: string = "main"): string {
+async function getResourceUrl(mode: string, path: string, buildNbrOrBranch: string = "main", integrity = true): Promise<string> {
+  const hashStr = integrity ? `#sha256=${await calculateHash(path)}` : "";
   path = resolveResourcePath(path);
 
   return mode === "development"
     ? `http://localhost:${devServerPort}/${path}`
-    : `https://raw.githubusercontent.com/${repo}/${buildNbrOrBranch}/${path}`;
+    : `https://raw.githubusercontent.com/${repo}/${buildNbrOrBranch}/${path}${hashStr}`;
 }
 
 /**
