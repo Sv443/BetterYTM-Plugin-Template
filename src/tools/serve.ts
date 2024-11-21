@@ -20,7 +20,7 @@ import packageJson from "../../package.json" with { type: "json" };
  */
 const outputDir = "dist";
 /** Whether to log requests to the console. */
-const enableLogging = false;
+const enableLogging = process.env.DEV_SERVER_LOG_REQUESTS?.trim().toLowerCase() === "true";
 /**
  * Paths to all folders that should be served by the dev server - paths are relative to this file.  
  * If an item is an array, all of its parts will be joined using `import("node:path").join()`
@@ -73,8 +73,8 @@ for(const path of staticPaths) {
 
 // create server:
 const server = app.listen(devServerPort, "0.0.0.0", () => {
-  console.log(`\x1b[34m\x1b[4mhttp://localhost:${devServerPort}/${encodeURIComponent(packageJson.userscriptName)}.user.js\x1b[0m`);
-  console.log(`Dev server is running on port ${devServerPort}`);
+  console.log(`\nDev server is running on port ${devServerPort}`);
+  console.log(`\x1b[34m\x1b[4mhttp://localhost:${devServerPort}/${encodeURIComponent(getScriptFileName())}.user.js\x1b[0m`);
   if(enableLogging)
     process.stdout.write("\nRequests: ");
   else
@@ -88,3 +88,8 @@ const server = app.listen(devServerPort, "0.0.0.0", () => {
     }, autoExitTime);
   }
 });
+
+/** Returns the userscript file name, which is `userscriptName` in package.json, modified to match that of `vite-plugin-monkey` */
+function getScriptFileName(): string {
+  return packageJson.userscriptName.toLowerCase().replace(/ /g, "-");
+}
