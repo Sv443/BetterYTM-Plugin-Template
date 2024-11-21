@@ -33,8 +33,8 @@ You may also import plain JavaScript files (with the extension .mjs) if you pref
   
 It is also set up to be easily hosted on a local server for testing and to be built for production with a single command.  
 If you use a UserScript manager extension such as [Violentmonkey](https://violentmonkey.github.io/), you can easily test the plugin by opening the local server URL in your browser.  
-The extension will keep updating the userscript automatically when any changes are made.  
-Configure this behavior in the `nodemonConfig` object in `package.json`.  
+The extension will keep updating the userscript automatically when any changes are made, as long as you clicked the "track external edits" button.  
+Configure this behavior in the `nodemonConfig` object in `package.json` and `src/tools/serve.ts`.  
   
 The library [UserUtils](https://github.com/Sv443-Network/UserUtils) is also included to provide a plethora of useful functions and classes for UserScripts.  
 I highly recommend checking it out! It is included on the BYTM API via `unsafeWindow.BYTM.UserUtils`.  
@@ -58,16 +58,15 @@ Have fun creating your plugin!
 <br>
 
 ## Setup
-1. Install Node.js (current version) and pnpm (with `npm i -g pnpm`)
+1. Install Node.js (current version or LTS) and [pnpm](https://pnpm.io/) (can be done with `npm i -g pnpm`)
 2. [Create a repository based on this template.](https://github.com/Sv443/BetterYTM-Plugin-Template/generate)
 3. Clone the repository to your local machine.
 4. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.
 5. Copy `.env.template` to `.env` and modify it to your needs.
 6. Install BetterYTM from the [releases page.](https://github.com/Sv443/BetterYTM/releases)  
   If you wanna prepare your code for the latest version that's still in development, check out the latest [pull request](https://github.com/Sv443/BetterYTM/pulls) for the download and changelog.
-7. Make sure Node.js and [pnpm](https://pnpm.io/) are installed.
-8. Open a terminal in the project root and run `pnpm i` to install dependencies.
-9. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
+7. Open a terminal in the project root and run `pnpm i` to install dependencies.
+8. Run `pnpm run dev` to build the plugin and host it on a local server for testing.  
   Open this URL with your UserScript manager extension to easily test the plugin.  
   I recommend using [Violentmonkey](https://violentmonkey.github.io/), which will automatically update the userscript when any changes are made.
 
@@ -108,7 +107,7 @@ Refer to the [commands section](#commands) for more information on the available
   - `resources.json` is where you define the `@resource` directives for your plugin, which can then be fetched with `GM.getResourceUrl()` and `GM.getResourceText()`.  
     The keys of this object are the identifiers you use to fetch the resources and the values are the paths to the resources, or an options object.  
     If a string path is given and it starts with a slash, it will be resolved relative to the root of the project, otherwise relative to the `assets/` folder.  
-    If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which can be set to `true` to automatically calculate the SRI hash for the asset and append it to the URL in the metadata block.
+    If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which will by default automatically calculate the SRI hash for the asset and append it to the URL in the metadata block, unless explicitly set to `false`.
 - The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  
@@ -132,7 +131,7 @@ Refer to the [commands section](#commands) for more information on the available
   - Your own website
 - [Subresource Integrity](https://www.tampermonkey.net/documentation.php?locale=en#api:Subresource_Integrity) for `@resource` directives is supported out of the box by this template.  
   This is to combat the risk of your externally loaded in assets being tampered with by a third party, reducing the possibility of MITM and XSS-type attacks.  
-  If you set an asset's `integrity` property to `true` in `assets/resources.json`, the plugin will automatically calculate the SRI hash and add it to the asset's URL.  
+  By default, each asset's `integrity` property is `true` in `assets/resources.json`, making the plugin automatically calculate the SRI hash and add it to the asset's URL.  
   Note that this means you will have to rebuild the plugin every time you change an asset that has SRI enabled.  
   If you mess up the strict build and commit order, the hash will be wrong and people will not be able to install your userscript.
 - Make sure to retain the notice [at the bottom of this file](#license) that your plugin contains code from BetterYTM in the readme and/or in a `console.log()` that is called on each page load.

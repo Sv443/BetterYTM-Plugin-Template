@@ -65,7 +65,7 @@ tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path 
   });
 
   // And then you can eval the fetched script as follows.
-  // Make sure to set the `integrity` property in `resources.json` to true so this can be done safely.
+  // Make sure to set the `integrity` property in `resources.json` to true so this can be done somewhat safely.
   try {
     eval(await exampleScript.text());
   }
