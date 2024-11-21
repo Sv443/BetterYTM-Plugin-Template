@@ -3,20 +3,20 @@
 // @namespace    https://github.com/Sv443
 // @version      0.1.0
 // @author       Sv443
-// @description  This is an example plugin for BetterYTM - https://github.com/Sv443/BetterYTM
+// @description  Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.
 // @license      WTFPL
 // @copyright    Copyright 2024 Sv443
-// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_128x128.png
+// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/2675b57/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
 // @homepage     https://github.com/Sv443/BetterYTM-Plugin-Template
 // @homepageURL  https://github.com/Sv443/BetterYTM-Plugin-Template
 // @source       https://github.com/Sv443/BetterYTM-Plugin-Template.git
 // @supportURL   https://github.com/Sv443/BetterYTM-Plugin-Template/issues
 // @match        https://youtube.com/*
 // @match        https://music.youtube.com/*
-// @resource     doc_changelog   https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/changelog.md
-// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_1000x1000.png
-// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/plugin_icon_128x128.png
-// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/3733fcf/assets/resourceExample.js#sha256=2pnooQQ8m6WU1xPIgSJ4bI4ilHjIWg/BxaPX7eIshS0=
+// @resource     doc_license     https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/2675b57/LICENSE.txt
+// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/2675b57/assets/plugin_icon_1000x1000.png#sha256=IrFR29ZTCXuH5WsSVcmPn5FA+GvBopOyGR9lFSi4s5c=
+// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/2675b57/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
+// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/2675b57/assets/resourceExample.js#sha256=2pnooQQ8m6WU1xPIgSJ4bI4ilHjIWg/BxaPX7eIshS0=
 // @connect      i.ytimg.com
 // @connect      youtube.com
 // @connect      github.com
@@ -142,7 +142,7 @@
       name: userscriptName,
       namespace,
       description: {
-        en_US: description
+        "en-US": description
       },
       homepage: {
         source: homepage,
@@ -172,7 +172,7 @@
     console.log(consPrefix, ...args);
   }
   const buildModeRaw = "production";
-  const buildNumberRaw = "3733fcf";
+  const buildNumberRaw = "2675b57";
   const buildMode = buildModeRaw.startsWith("#{{") ? "BUILD_ERROR" : buildModeRaw;
   const buildNumber = buildNumberRaw.startsWith("#{{") ? "BUILD_ERROR" : buildNumberRaw;
   function examplePreInit() {
