@@ -107,7 +107,8 @@ Refer to the [commands section](#commands) for more information on the available
   - `resources.json` is where you define the `@resource` directives for your plugin, which can then be fetched with `GM.getResourceUrl()` and `GM.getResourceText()`.  
     The keys of this object are the identifiers you use to fetch the resources and the values are the paths to the resources, or an options object.  
     If a string path is given and it starts with a slash, it will be resolved relative to the root of the project, otherwise relative to the `assets/` folder.  
-    If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which will by default automatically calculate the SRI hash for the asset and append it to the URL in the metadata block, unless explicitly set to `false`.
+    If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which will by default automatically calculate the SRI hash for the asset and append it to the URL in the metadata block, unless explicitly set to `false`.  
+    If you include files that can change outside your influence like libraries, make sure you use a CDN with versioned URLs, so the file doesn't change (because the hash will only be calculated once at build time). An example of this can be found in the `resources.json` file.
 - The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  

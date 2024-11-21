@@ -67,9 +67,13 @@ export default defineConfig(async ({ mode }) => {
           "run-at": "document-start",
           author: author.name,
           connect: [
+            // for yt
             "i.ytimg.com",
             "youtube.com",
+            // for fetching resources
             "github.com",
+            "raw.githubusercontent.com",
+            // add anything else that you may want to fetch with GM.xmlHttpRequest
           ],
           copyright: `Copyright ${new Date().getFullYear()} ${author.name}`,
           description: packageJson.description,
@@ -144,25 +148,40 @@ async function getResources(mode: string, buildNbrOrBranch: string): Promise<Rec
   for(const [name, resource] of Object.entries(resourcesJson)) {
     const path = typeof resource === "string" ? resource : resource.path;
     const integrity = typeof resource === "string" || typeof resource === "object" && (!("integrity" in resource) || resource.integrity === true);
-    resources[name] = `${await getResourceUrl(mode, path, buildNbrOrBranch, integrity)}`;
+    resources[name] = await getResourceUrl(mode, path, buildNbrOrBranch, integrity);
   }
   return resources;
 }
 
 /**
- * Calculates the SHA-256 hash of the file at the given path.  
+ * Calculates the SHA-256 hash of the file at the given path (or http(s) URL).  
  * Uses {@linkcode resolveResourcePath()} to resolve the path, meaning paths prefixed with a slash are relative to the repository root, otherwise they are relative to the `assets` directory.
  */
-function calculateHash(path: string): Promise<string> {
-  path = resolveResourcePath(path);
+function calculateHash(path: string) {
+  if(path.startsWith("http"))
+    return new Promise(async (res, rej) => {
+      try {
+        const data = await (await fetch(path)).text();
 
-  return new Promise((res, rej) => {
-    const hash = createHash("sha256");
-    const stream = createReadStream(resolve(path));
-    stream.on("data", data => hash.update(data));
-    stream.on("end", () => res(hash.digest("base64")));
-    stream.on("error", rej);
-  });
+        const hash = createHash("sha256");
+        hash.update(data);
+        hash.addListener("error", rej);
+
+        return res(hash.digest("base64"));
+      }
+      catch(err) {
+        console.error(`Failed to fetch from the URL '${path}'. Falling back to 'HASH_ERROR'.`, err);
+        return res("HASH_ERROR");
+      }
+    });
+  else
+    return new Promise((res, rej) => {
+      const hash = createHash("sha256");
+      const stream = createReadStream(resolve(resolveResourcePath(path)));
+      stream.on("data", data => hash.update(data));
+      stream.on("end", () => res(hash.digest("base64")));
+      stream.on("error", rej);
+    });
 }
 
 /**
@@ -172,10 +191,14 @@ function calculateHash(path: string): Promise<string> {
  * @param mode `development` or `production`, defaults to `development`
  * @param path The path to the resource - if prefixed with a slash, it is relative to the repository root, otherwise it is relative to the `assets` directory.
  * @param buildNbrOrBranch The build number or branch name to use in the URL, defaults to `main` - this is very useful for versioned asset URLs, which will never break by changes made to the `main` branch.
- * @param integrity Whether to append the hash of the file to the URL for [Subresource Integrity.](https://www.tampermonkey.net/documentation.php?locale=en#api:Subresource_Integrity)
+ * @param calcIntegrity Whether to append the hash of the file to the URL for [Subresource Integrity.](https://www.tampermonkey.net/documentation.php?locale=en#api:Subresource_Integrity)
  */
-async function getResourceUrl(mode: string, path: string, buildNbrOrBranch: string = "main", integrity = true): Promise<string> {
-  const hashStr = integrity ? `#sha256=${await calculateHash(path)}` : "";
+async function getResourceUrl(mode: string, path: string, buildNbrOrBranch: string = "main", calcIntegrity = true): Promise<string> {
+  const hashStr = calcIntegrity ? `#sha256=${await calculateHash(path)}` : "";
+
+  if(path.startsWith("http"))
+    return `${path}${hashStr}`;
+
   path = resolveResourcePath(path);
 
   return mode === "development"

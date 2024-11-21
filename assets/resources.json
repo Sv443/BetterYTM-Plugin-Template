@@ -4,7 +4,6 @@
     "path": "/LICENSE.txt",
     "integrity": false
   },
-  "script_example": {
-    "path": "resourceExample.js"
-  }
+  "script_example": "resourceExample.js",
+  "library_lodash": "https://cdn.jsdelivr.net/npm/lodash@4.17.21"
 }
