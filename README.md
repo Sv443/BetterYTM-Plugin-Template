@@ -159,7 +159,7 @@ Refer to the [commands section](#commands) for more information on the available
   This is useful for development and testing purposes.  
   Use `--port=n` to specify a different port (8767 by default) and `--auto-exit-time=n` to auto-shutdown the server after n seconds.
 - `pnpm run lint` - Lints the code with ESLint.  
-  Feel free to modify the config at `.eslint.config.mjs` to your liking.
+  Feel free to modify the config at `eslint.config.mjs` to your liking.
 - `pnpm run format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
 - `pnpm run node-ts path/to/file.ts` - Runs the given TS file using the normal Node.js binary and the ts-node ESM loader. This is basically like running `node file.js` but with TypeScript & ESM and it allows you to use arguments intrinsic to Node.
 
