@@ -21,11 +21,10 @@
     "url": "git+https://github.com/Sv443/BetterYTM-Plugin-Template.git"
   },
   "scripts": {
-    "dev": "concurrently \"nodemon --exec pnpm run build-dev\" \"pnpm run serve\"",
+    "dev": "concurrently \"nodemon --exec pnpm build-dev\" \"pnpm serve\"",
     "build-dev": "vite build --mode development",
     "build": "vite build --mode production",
-    "serve": "pnpm run node-ts ./src/tools/serve.ts",
-    "node-ts": "node --no-warnings=ExperimentalWarning --enable-source-maps --loader ts-node/esm",
+    "serve": "node --import tsx ./src/tools/serve.ts",
     "lint": "eslint src/**/*",
     "format": "eslint --fix src/**/*"
   },
@@ -64,7 +63,7 @@
     "express": "^4.21.2",
     "globals": "^15.14.0",
     "nodemon": "^3.1.9",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
     "vite-plugin-monkey": "^4.0.6",
