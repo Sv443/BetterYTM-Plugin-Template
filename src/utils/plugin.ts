@@ -1,5 +1,5 @@
 import { PluginIntent, type PluginDef, type PluginRegisterResult } from "@bytm/src/types.js";
-import { bugs, description, homepage, license, licenseUrl, namespace, userscriptName, version } from "@root/package.json" with { type: "json" };
+import pkg from "@root/package.json" with { type: "json" };
 
 // #region pluginDef
 /** This object contains all the metadata of your plugin that is used by BetterYTM to display information about your plugin */
@@ -8,19 +8,19 @@ export const pluginDef: PluginDef = {
   intents: PluginIntent.ReadFeatureConfig | PluginIntent.CreateModalDialogs,
   // The metadata of the plugin:
   plugin: {
-    name: userscriptName,
-    namespace,
+    name: pkg.userscriptName,
+    namespace: pkg.namespace,
     description: {
-      "en-US": description,
+      "en-US": pkg.description,
     },
     homepage: {
-      source: homepage,
-      bug: bugs.url,
+      source: pkg.homepage,
+      bug: pkg.bugs.url,
     },
-    version,
+    version: pkg.version,
     license: {
-      name: license,
-      url: licenseUrl,
+      name: pkg.license,
+      url: pkg.licenseUrl,
     },
     // If you have a logo, you can add it here - it should *ideally* be square and between 48x48 and 128x128:
     iconUrl: "https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png",
