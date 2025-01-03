@@ -26,8 +26,8 @@
     "build": "vite build --mode production",
     "serve": "pnpm run node-ts ./src/tools/serve.ts",
     "node-ts": "node --no-warnings=ExperimentalWarning --enable-source-maps --loader ts-node/esm",
-    "lint": "eslint ./src",
-    "format": "eslint --fix ./src"
+    "lint": "eslint src/**/*",
+    "format": "eslint --fix src/**/*"
   },
   "nodemonConfig": {
     "watch": [

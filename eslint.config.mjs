@@ -15,7 +15,8 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
-export default [
+/** @type {import("eslint").Linter.Config[]} */
+const cfg = [
   {
     ignores: [
       "**/*.min.*",
@@ -28,6 +29,7 @@ export default [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
   ), {
+    files: ["**/*.ts", "**/*.mts", "**/*.cts"],
     plugins: {
       "@typescript-eslint": typescriptEslint,
     },
@@ -76,6 +78,11 @@ export default [
     },
   }, {
     files: ["**/*.js", "**/*.mjs", "**/*.cjs"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+    },
     rules: {
       "@typescript-eslint/no-var-requires": "off",
       quotes: ["error", "double"],
@@ -95,3 +102,5 @@ export default [
     },
   },
 ];
+
+export default cfg;
