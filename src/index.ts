@@ -39,7 +39,8 @@ function preInit() {
   // check out this example code in src/example/preInit.ts:
   examplePreInit();
 
-  // example calling functions from the plain JS module src/example/plainJs.mjs
+  // here are some examples involving the plain JS module 'src/example/plainJs.mjs'
+  // hover over the functions to see how the IDE can help you with types, even without TypeScript:
 
   // this one accepts any type, making it prone to bugs:
   const foo = plainJsSetFactor("hello");
@@ -48,11 +49,11 @@ function preInit() {
   const factor = plainJsSetFactor(2);
   //    ^?: number
 
-  // this one has its argument and return value typed, so the IDE gives hints about the expected types:
-  const value = jsdocPow(9);
+  // this one has its argument and return value typed via JSDoc, so the IDE gives hints about the expected types:
+  const result = jsdocPow(9);
   //    ^?: number
 
-  log("factor:", factor, "value:", value); // 2, 81
+  log(`factor: ${factor}, result: ${result}`); // factor: 2, result: 81
 
   void foo;
 }
