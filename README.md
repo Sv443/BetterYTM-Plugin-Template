@@ -166,7 +166,7 @@ Have fun creating your plugin!
 <br>
 
 ## License
-This project (minus Git submodules) is licensed under the [WTFPL](./LICENSE.txt) - do whatever you want with it.  
-It is based on [BetterYTM](https://github.com/Sv443/BetterYTM), which itself is licensed under the [AGPL-3.0 license.](https://github.com/Sv443/BetterYTM/blob/main/LICENSE.txt)  
+This project (minus Git submodules) is licensed under the [Unlicense](./LICENSE.txt) - do whatever you want with it.  
+It is based on [BetterYTM](https://github.com/Sv443/BetterYTM), which itself is mostly licensed under the [AGPL-3.0 license.](https://github.com/Sv443/BetterYTM/blob/main/LICENSE.txt)  
   
 <sup>Make sure to include this in your plugin's readme to comply with [BetterYTM's plugin sublicense.](https://github.com/Sv443/BetterYTM/blob/main/license-for-plugins.txt)</sup>
