@@ -43,6 +43,10 @@
       "dist/**"
     ]
   },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=8"
+  },
   "dependencies": {
     "@sv443-network/userutils": "^8.4.0",
     "compare-versions": "^6.1.1",
