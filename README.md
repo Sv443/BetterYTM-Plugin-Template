@@ -2,7 +2,7 @@
 
 <img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">
 <h2>BetterYTM Plugin Template</h2>
-<h4 style="margin-top: 0;">– compatible with BYTM v2.2.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v2.2.0" target="_blank">⧉</a></sup> –</h4>
+<h4 style="margin-top: 0;">– compatible with BYTM v2.3.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v2.3.0" target="_blank">⧉</a></sup> –</h4>
 
 </div>
 <br>
