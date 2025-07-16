@@ -1,3 +1,8 @@
+/**
+ * @module logging
+ * @description This module provides functions to log messages to the console with a consistent prefix and can even allow hooking up mechanisms like log aggregation services.
+ */
+
 import packageJson from "@root/package.json" with { type: "json" };
 
 /** Common prefix to be able to tell logged messages apart and filter them in devtools */

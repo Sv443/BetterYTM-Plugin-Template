@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "homepage": "https://github.com/Sv443/BetterYTM-Plugin-Template",
   "namespace": "https://github.com/Sv443",
-  "license": "WTFPL",
+  "license": "Unlicense",
   "licenseUrl": "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/LICENSE.txt",
   "author": {
     "name": "Sv443",
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/Sv443/BetterYTM-Plugin-Template.git"
   },
   "scripts": {
-    "dev": "concurrently \"nodemon --exec pnpm build-dev\" \"pnpm serve\"",
+    "dev": "concurrently \"nodemon --exec pnpm build-dev -- -- --serve\" \"pnpm serve\"",
     "build-dev": "vite build --mode development",
     "build": "vite build --mode production",
     "serve": "node --import tsx ./src/tools/serve.ts",
