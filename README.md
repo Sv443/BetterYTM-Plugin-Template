@@ -36,8 +36,9 @@ If you use a UserScript manager extension such as [Violentmonkey](https://violen
 The extension will keep updating the userscript automatically when any changes are made, as long as you clicked the "track external edits" button.  
 Configure this behavior in the `nodemonConfig` object in `package.json` and `src/tools/serve.ts`.  
   
-The library [UserUtils](https://github.com/Sv443-Network/UserUtils) is also included to provide a plethora of useful functions and classes for UserScripts.  
-I highly recommend checking it out! It is included on the BYTM API via `unsafeWindow.BYTM.UserUtils`.  
+The utility libraries [UserUtils](https://github.com/Sv443-Network/UserUtils) and [CoreUtils](https://github.com/Sv443-Network/CoreUtils) are also included to provide a plethora of useful functions and classes for UserScripts.  
+I highly recommend checking them both out! They are included on the BYTM API via `unsafeWindow.BYTM.UserUtils` and `unsafeWindow.BYTM.CoreUtils`.  
+Note: CoreUtils currently contains a lot of duplicate code from UserUtils, but in the future it will instead be a more generalized dependency of UserUtils. So in the future, expect the userscript-specific utilities to stay in UserUtils and everything else to be moved to CoreUtils.  
   
 > [!NOTE]  
 > If your plugin is published, send me a quick [E-Mail](https://sv443.net/) or message on [Discord](https://dc.sv443.net/) so I can add it to the [BetterYTM Plugin List.](https://github.com/Sv443/BetterYTM#plugins)  
@@ -48,12 +49,12 @@ Have fun creating your plugin!
 <br>
 
 ## Prerequisites
-- Reading the [BetterYTM Contributing Guide](https://github.com/Sv443/BetterYTM/blob/main/contributing.md) (or the latest in-dev version [here](https://github.com/Sv443/BetterYTM/blob/develop/contributing.md)).  
+- Reading the [BetterYTM Contributing Guide](https://github.com/Sv443/BetterYTM/blob/main/contributing.md) (for the [latest in-dev version's guide click here](https://github.com/Sv443/BetterYTM/blob/develop/contributing.md)).  
   It contains all the information you need to know about the BYTM API and how to create a plugin.
 - Having basic knowledge of writing UserScripts with JavaScript and ideally also having basic TypeScript knowledge.
 - Installing a powerful IDE like [VS Code](https://code.visualstudio.com/) to get extension recommendations, be able to inspect TS types and BYTM-internal code and to get auto-completion for the members of the BYTM API.
 - Reading this whole document to understand how to set up and use this template correctly.
-- Reading the [BetterYTM plugin sublicense](https://github.com/Sv443/BetterYTM/blob/main/license-for-plugins.txt)
+- Reading the [BetterYTM plugin sublicense.](https://github.com/Sv443/BetterYTM/blob/main/license-for-plugins.txt)
 
 <br>
 
@@ -61,16 +62,17 @@ Have fun creating your plugin!
 1. [Install Node.js](https://nodejs.org/) (current version or LTS, has to be at least v22) and [pnpm](https://pnpm.io/) (can be done with `npm i -g pnpm@latest`)
 2. [Create a repository based on this template.](https://github.com/new?template_name=BetterYTM-Plugin-Template&template_owner=Sv443)
 3. Clone your new repository to your local machine.
-4. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.
+4. Use `git submodule update --init --recursive` to clone the BetterYTM submodule.  
+  Leave the submodule set to track the `main` branch to target the latest stable version, or set it to `develop` to use the [in-dev version from the latest pull request.](https://github.com/Sv443/BetterYTM/pulls)
 5. Copy `.env.template` to `.env` and modify it to your needs.
-6. Make sure you [installed a compatible version of BetterYTM from the releases page.](https://github.com/Sv443/BetterYTM/releases)  
-  If you wanna prepare your code for the latest version that's still in development, [check out the latest pull request](https://github.com/Sv443/BetterYTM/pulls) for the download and changelog.
+6. Make sure you [installed a compatible version of BetterYTM from the releases page](https://github.com/Sv443/BetterYTM/releases) or [the in-dev version from the latest pull request.](https://github.com/Sv443/BetterYTM/pulls)  
+  Alternatively, you can also go into the `bytm` folder and run `pnpm i` and `pnpm dev-cdn` to build and host the currently checked out version of BetterYTM on a local server.
 7. Open a terminal in the project root and run `pnpm i` to install dependencies.
 8. Run `pnpm dev` to build the plugin and host it on a local server for testing.  
   Open this URL with your UserScript manager extension to easily test the plugin.  
   I recommend using [the Violentmonkey extension](https://violentmonkey.github.io/), which will automatically update the userscript when any changes are made.
 
-- [Check out the inner workings section](#inner-workings) to understand [how the template is structured and how files are organized](#file-structure) and [some tips and notes on the internals.](#tips-and-notes)
+- [Check out the inner workings section](#inner-workings) to understand [how the template is structured and how files are organized](#file-structure) and read up on [some tips and notes on the internals.](#tips-and-notes)
 - [Refer to the commands section for info on all other commands](#commands), like how to build for production or how to lint your code.
 
 <br>
@@ -85,8 +87,8 @@ Have fun creating your plugin!
   - `eslint.config.mjs` contains the ESLint configuration in the new v9 format. Feel free to modify this to your liking.  
     The default settings include 2-space indentation, double quotes, trailing commas, and more.  
     Things to look out for:
-    - The rule `@typescript-eslint/no-empty-object-type` is turned off, which means you can use the type `{}`, but be careful since this *doesn't* mean "empty object" and is a [common pitfall](https://www.totaltypescript.com/the-empty-object-type-in-typescript)
-    - Unused function arguments will yield a warning, unless they start with an underscore
+    - The rule `@typescript-eslint/no-empty-object-type` is turned off, which means you can use the type `{}`, but be careful since this *doesn't* mean "empty object" and is [a common pitfall.](https://www.totaltypescript.com/the-empty-object-type-in-typescript)
+    - Unused function arguments will yield a warning, unless they start with an underscore.
   - `package.json` is the single source of truth for lots of your plugin's metadata, like the name, version, description, etc.  
     Make sure to update this file to match your plugin's details.
   - `tsconfig.json` contains the TypeScript configuration. Feel free to modify this to your needs.
