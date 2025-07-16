@@ -2,7 +2,9 @@ import "dotenv/config";
 import { execSync } from "child_process";
 import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
+import { stat } from "node:fs/promises";
 import { resolve } from "node:path";
+import { styleText } from "node:util";
 import { defineConfig, normalizePath, Plugin } from "vite";
 import tsConfigPathsPlugin from "vite-tsconfig-paths";
 import monkeyPlugin from "vite-plugin-monkey";
@@ -103,6 +105,26 @@ export default defineConfig(async ({ mode }) => {
           },
         },
       }),
+      {
+        name: "vite-plugin-custom-post-build",
+        async closeBundle() {
+          const sizeKiB = (await stat(normalizePath(`${cwd()}/dist/${getScriptFileName()}.user.js`))).size / 1024;
+
+          console.log("\nBuild stats:");
+          console.log(`  - Build number: ${styleText("blueBright", buildNbr)}`);
+          console.log(`  - Build mode:   ${styleText("blueBright", mode)}`);
+          console.log(`  - Size on disk: ${styleText("blueBright", `${sizeKiB.toFixed(2)} KiB`)}`);
+
+          if(process.argv.includes("--serve")) {
+            console.log(`\nThe dev server is running on port ${devServerPort}`);
+            console.log(`Install via ${styleText(["blue", "underline"], `http://localhost:${devServerPort}/${encodeURIComponent(getScriptFileName())}.user.js\n`)}`);
+          }
+          else
+            console.log();
+
+          // this is executed after the build is done, so you can do any post-build tasks in here too
+        },
+      },
     ],
   };
 });
@@ -121,6 +143,11 @@ function replaceStringsPlugin(options: Record<string, string>): Plugin {
       return { code };
     },
   };
+}
+
+/** Returns the userscript file name, which is `userscriptName` in package.json, modified to match that of `vite-plugin-monkey` */
+function getScriptFileName(): string {
+  return packageJson.userscriptName.toLowerCase().replace(/\s/g, "-");
 }
 
 /**
@@ -170,8 +197,8 @@ function calculateHash(path: string) {
         return res(hash.digest("base64"));
       }
       catch(err) {
-        console.error(`Failed to fetch from the URL '${path}'. Falling back to 'HASH_ERROR'.`, err);
-        return res("HASH_ERROR");
+        console.error(`Failed to fetch from the URL '${path}'. Falling back to 'FETCH_ERROR'.`, err);
+        return res("FETCH_ERROR");
       }
     });
   else
