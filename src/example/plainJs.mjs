@@ -1,4 +1,10 @@
 /**
+ * @module example/plainJs
+ * @description Contains plain JS code that can also be imported in TypeScript files.  
+ * Make use of JSDoc comments to provide type information for IDEs like VSCode and to enable *some* level of interoperability with TypeScript.
+ */
+
+/**
  * @type {number|undefined}
  * This variable would always be `any`, but with this JSDoc comment, it's explicitly typed.
  */
