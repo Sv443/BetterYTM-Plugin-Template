@@ -12,7 +12,6 @@ import { fileURLToPath } from "node:url";
 import express, { NextFunction, Request, Response } from "express";
 import "dotenv/config";
 import { defaultPort } from "../../vite.config.js";
-import packageJson from "../../package.json" with { type: "json" };
 
 /**
  * Path to the directory where the output files are located.  
@@ -73,8 +72,6 @@ for(const path of staticPaths) {
 
 // create server:
 const server = app.listen(devServerPort, "0.0.0.0", () => {
-  console.log(`\nDev server is running on port ${devServerPort}`);
-  console.log(`\x1b[34m\x1b[4mhttp://localhost:${devServerPort}/${encodeURIComponent(getScriptFileName())}.user.js\x1b[0m`);
   if(enableLogging)
     process.stdout.write("\nRequests: ");
   else
@@ -88,8 +85,3 @@ const server = app.listen(devServerPort, "0.0.0.0", () => {
     }, autoExitTime);
   }
 });
-
-/** Returns the userscript file name, which is `userscriptName` in package.json, modified to match that of `vite-plugin-monkey` */
-function getScriptFileName(): string {
-  return packageJson.userscriptName.toLowerCase().replace(/ /g, "-");
-}
