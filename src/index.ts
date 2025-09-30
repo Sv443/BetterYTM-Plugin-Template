@@ -45,8 +45,6 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
       if(featureKey === "initSiteEvents") {
         // for example, call a function that depends on the siteEvents system in here:
       }
-
-      void ["to make ESLint shut up:", featureKey];
     });
 
     events.once("bytm:ready", () => {
@@ -59,7 +57,7 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
 
     events.once("bytm:allReady", () => {
       // this code will run when all features have fully initialized or the initialization has timed out
-      // I don't recommend using this to modify the page or BYTM features, since it will be emitted much later than the point at which the DOM/feature is ready
+      // I don't recommend using this to modify the page or BYTM features, since it will be emitted a bit later than the point at which the DOM/feature is ready
     });
   }
   catch(err) {
