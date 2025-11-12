@@ -23,6 +23,7 @@ export const pluginDef: PluginDef = {
     },
     homepage: {
       source: pkg.homepage,
+      changelog: pkg.changelogUrl,
       bug: pkg.bugs.url,
     },
     version: pkg.version,
