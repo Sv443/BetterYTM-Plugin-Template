@@ -54,8 +54,8 @@ export let token: PluginRegisterResult["token"];
  * Resolves as soon as `bytm:pluginsRegistered` was emitted.  
  * Throws if the {@linkcode pluginDef} is wrong.
  */
-export async function tryRegisterPlugin({ detail: registerPlugin }: WindowEventMap["bytm:registerPlugin"]) {
-  const res = registerPlugin(pluginDef);
+export async function tryRegisterPlugin(event: WindowEventMap["bytm:registerPlugin"]) {
+  const res = event.detail(pluginDef);
   events = res.events;
   token = res.token;
 

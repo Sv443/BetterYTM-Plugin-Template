@@ -3,7 +3,7 @@
  * @description The entry point of the script.
  */
 
-import { events, tryRegisterPlugin } from "@utils/plugin.js";
+import { events, tryRegisterPlugin } from "@root/src/plugin.ts";
 import { log } from "@utils/logging.js";
 import { buildNumber, buildMode } from "@utils/constants.js";
 import { examplePreInit } from "@/example/preInit.js";
@@ -13,11 +13,23 @@ import "@/types.js";
 
 // #region register plugin
 
+// TODO:FIXME: this event somehow isnt emitted
+
 // this is the earliest point you may register the plugin - it is executed before the DOM is loaded and before BYTM has loaded anything asynchronous, like its feature configuration, but immediately after the plugin interface is ready:
-unsafeWindow.addEventListener("bytm:preInitPlugin", async (event) => {
+unsafeWindow.addEventListener("bytm:preInitPlugin", async () => {
+  log("bytm:preInitPlugin was emitted");
+
+  // call a few functions that need to run as soon as possible:
+  preInit();
+});
+
+// this is the main entry point of plugins, executed before the DOM is loaded, but after some slightly time consuming initialization tasks have been done by BYTM:
+unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
+  log("bytm:registerPlugin was emitted");
+
   try {
     // register the plugin with BetterYTM to be able to call authenticated API functions:
-    await tryRegisterPlugin(event);
+    tryRegisterPlugin(event);
     log(`Registered plugin successfully!\nUsing BetterYTM v${unsafeWindow.BYTM.version}\nPlugin build number: ${buildNumber} (${buildMode} mode)`);
   }
   catch(err) {
@@ -25,14 +37,6 @@ unsafeWindow.addEventListener("bytm:preInitPlugin", async (event) => {
     console.error("Couldn't register plugin due to error:", err);
     return;
   }
-
-  // call a few functions that need to be run as soon as possible:
-  preInit();
-});
-
-// this is the main entry point of plugins, executed before the DOM is loaded, but after some slightly time consuming initialization tasks have been done by BYTM:
-unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
-  void ["plugin is already registered, so disregard the event:", event];
 
   try {
     // now hook into various events to run your code when certain parts are ready:
@@ -50,6 +54,8 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
     events.once("bytm:ready", () => {
       // this event is emitted when the plugin is fully registered and the DOM is ready, but before most features have finished initializing
       // you should instead use `bytm:featureInitialized` to check if the feature you depend on is ready
+
+      log("bytm:ready was emitted - initializing the plugin...");
 
       // check out this example code in src/example/main.ts:
       exampleMainEntrypoint();
