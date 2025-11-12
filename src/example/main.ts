@@ -5,7 +5,7 @@
  */
 
 import { error, log } from "@utils/logging.js";
-import { token } from "@utils/plugin.js";
+import { token } from "@root/src/plugin.ts";
 import { LogLevel } from "@bytm/src/types.js";
 
 export async function exampleMainEntrypoint() {
