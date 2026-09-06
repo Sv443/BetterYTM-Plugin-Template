@@ -1,10 +1,11 @@
 {
   "recommendations": [
-    "andywang.vscode-scriptmonkey",
+    "coyote-studios.monkey-wrench",
     "dbaeumer.vscode-eslint",
     "fabiospampinato.vscode-highlight",
   ],
   "unwantedRecommendations": [
     "adpyke.vscode-userscript",
+    "andywang.vscode-scriptmonkey",
   ],
 }
