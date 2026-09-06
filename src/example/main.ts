@@ -16,7 +16,7 @@ export async function exampleMainEntrypoint() {
 
   // And then insert the button into a very specific element, as soon as it is found in the DOM:
   unsafeWindow.BYTM.addSelectorListener("playerBar", ".middle-controls-buttons", {
-    listener: (btnsContainerElement) =>
+    listener: (btnsContainerElement: HTMLElement) =>
       btnsContainerElement.appendChild(button),
     debounce: 100,
   });
@@ -25,7 +25,7 @@ export async function exampleMainEntrypoint() {
   const ac = new AbortController();
 
   // And add accessible click and keyboard-press event listeners to the button:
-  unsafeWindow.BYTM.onInteraction(button, async (evt) => {
+  unsafeWindow.BYTM.onInteraction(button, async (evt: MouseEvent | KeyboardEvent) => {
     // (only add the style if it doesn't exist yet)
     if(document.head.querySelector("style#rainbowfill-style"))
       return;

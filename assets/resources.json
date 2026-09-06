@@ -5,5 +5,5 @@
     "integrity": false
   },
   "script_example": "resourceExample.js",
-  "library_lodash": "https://cdn.jsdelivr.net/npm/lodash@4.17.21"
+  "library_lodash": "https://cdn.jsdelivr.net/npm/lodash@4.18.1"
 }
