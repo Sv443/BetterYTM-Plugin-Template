@@ -2,7 +2,7 @@
 
 <img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">
 <h2>BetterYTM Plugin Template</h2>
-<h4 style="margin-top: 0;">– compatible with BYTM v3.0.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v3.0.0" target="_blank">⧉</a></sup> –</h4>
+<h4 style="margin-top: 0;">– compatible with BYTM v3.1.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v3.1.0" target="_blank">⧉</a></sup> –</h4>
 
 </div>
 <br>
@@ -74,6 +74,7 @@ Have fun creating your plugin!
 
 - [Check out the inner workings section](#inner-workings) to understand [how the template is structured and how files are organized](#file-structure) and read up on [some tips and notes on the internals.](#tips-and-notes)
 - [Refer to the commands section for info on all other commands](#commands), like how to build for production or how to lint your code.
+<!-- TODO(3.2.0): almanac link -->
 
 <br>
 
