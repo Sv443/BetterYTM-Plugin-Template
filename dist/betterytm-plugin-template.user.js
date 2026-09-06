@@ -5,19 +5,19 @@
 // @author       Sv443
 // @description  Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.
 // @license      Unlicense
-// @copyright    Copyright 2025 Sv443
-// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/a65da62/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
+// @copyright    Copyright 2026 Sv443
+// @icon         https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/f8c2466/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
 // @homepage     https://github.com/Sv443/BetterYTM-Plugin-Template
 // @homepageURL  https://github.com/Sv443/BetterYTM-Plugin-Template
 // @source       https://github.com/Sv443/BetterYTM-Plugin-Template.git
 // @supportURL   https://github.com/Sv443/BetterYTM-Plugin-Template/issues
 // @match        https://youtube.com/*
 // @match        https://music.youtube.com/*
-// @resource     doc_license     https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/a65da62/LICENSE.txt
-// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/a65da62/assets/plugin_icon_1000x1000.png#sha256=IrFR29ZTCXuH5WsSVcmPn5FA+GvBopOyGR9lFSi4s5c=
-// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/a65da62/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
-// @resource     library_lodash  https://cdn.jsdelivr.net/npm/lodash@4.17.21#sha256=qXBd/EfAdjOA2FGrGAG+b3YBn2tn5A6bhz+LSgYD96k=
-// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/a65da62/assets/resourceExample.js#sha256=b/3glaVu/edSdKrr1dEFH02dww35y1nun7fuXIVNFhA=
+// @resource     doc_license     https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/f8c2466/LICENSE.txt
+// @resource     icon_1000       https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/f8c2466/assets/plugin_icon_1000x1000.png#sha256=IrFR29ZTCXuH5WsSVcmPn5FA+GvBopOyGR9lFSi4s5c=
+// @resource     icon_128        https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/f8c2466/assets/plugin_icon_128x128.png#sha256=4GgH3wuDgVjYVPf1s6NURcDU0QvjnLCigrlKowsF6x8=
+// @resource     library_lodash  https://cdn.jsdelivr.net/npm/lodash@4.18.1#sha256=qNfmKRrYAlb5dqzpCCSnEBjS9waZLJEHsgvc7Ze+4ns=
+// @resource     script_example  https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/f8c2466/assets/resourceExample.js#sha256=b/3glaVu/edSdKrr1dEFH02dww35y1nun7fuXIVNFhA=
 // @connect      i.ytimg.com
 // @connect      youtube.com
 // @connect      github.com
@@ -53,6 +53,7 @@
   const description = "Example and template for creating a plugin using BetterYTM's existing API to further improve YouTube and YouTube Music.";
   const version = "0.1.0";
   const homepage = "https://github.com/Sv443/BetterYTM-Plugin-Template";
+  const changelogUrl = "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/CHANGELOG.md";
   const namespace = "https://github.com/Sv443";
   const license = "Unlicense";
   const licenseUrl = "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/main/LICENSE.txt";
@@ -64,6 +65,7 @@
     description,
     version,
     homepage,
+    changelogUrl,
     namespace,
     license,
     licenseUrl,
@@ -84,6 +86,7 @@
       },
       homepage: {
         source: packageJson.homepage,
+        changelog: packageJson.changelogUrl,
         bug: packageJson.bugs.url
       },
       version: packageJson.version,
@@ -101,8 +104,8 @@
   };
   let events;
   let token;
-  async function tryRegisterPlugin({ detail: registerPlugin }) {
-    const res = registerPlugin(pluginDef);
+  async function tryRegisterPlugin(event) {
+    const res = event.detail(pluginDef);
     events = res.events;
     token = res.token;
     return await events.once("pluginRegistered");
@@ -116,7 +119,7 @@
   }
   const rawConsts = {
     buildMode: "production",
-    buildNumber: "a65da62"
+    buildNumber: "f8c2466"
   };
   const getConst = (constKey, defaultVal) => {
     const val = rawConsts[constKey];
@@ -198,9 +201,14 @@ tp-yt-iron-icon, svg path, .bytm-adorn-icon svg path, .bytm-toast-icon svg path 
     console.log("Hello from JS!", arg);
     return globalVar = arg;
   }
-  unsafeWindow.addEventListener("bytm:preInitPlugin", async (event) => {
+  unsafeWindow.addEventListener("bytm:preInitPlugin", async () => {
+    log("bytm:preInitPlugin was emitted");
+    preInit();
+  });
+  unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
+    log("bytm:registerPlugin was emitted");
     try {
-      await tryRegisterPlugin(event);
+      tryRegisterPlugin(event);
       log(`Registered plugin successfully!
 Using BetterYTM v${unsafeWindow.BYTM.version}
 Plugin build number: ${buildNumber} (${buildMode} mode)`);
@@ -209,15 +217,13 @@ Plugin build number: ${buildNumber} (${buildMode} mode)`);
       console.error("Couldn't register plugin due to error:", err);
       return;
     }
-    preInit();
-  });
-  unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
     try {
       events.once("bytm:featureInitialized", (featureKey) => {
         if (featureKey === "initSiteEvents") {
         }
       });
       events.once("bytm:ready", () => {
+        log("bytm:ready was emitted - initializing the plugin...");
         exampleMainEntrypoint();
       });
       events.once("bytm:allReady", () => {
