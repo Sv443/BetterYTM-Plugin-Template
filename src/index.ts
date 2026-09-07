@@ -27,7 +27,7 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
 
   try {
     // register the plugin with BetterYTM to be able to call authenticated API functions:
-    tryRegisterPlugin(event);
+    await tryRegisterPlugin(event);
     log(`Registered plugin successfully!\nUsing BetterYTM v${unsafeWindow.BYTM.version}\nPlugin build number: ${buildNumber} (${buildMode} mode)`);
   }
   catch(err) {

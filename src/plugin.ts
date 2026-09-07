@@ -56,9 +56,14 @@ export let token: PluginRegisterResult["token"];
  * Throws if the {@linkcode pluginDef} is wrong.
  */
 export async function tryRegisterPlugin(event: WindowEventMap["bytm:registerPlugin"]) {
-  const res = event.detail(pluginDef);
-  events = res.events;
-  token = res.token;
+  if(typeof event.detail === "function") {
+    const res = await event.detail(pluginDef);
+    events = res.events;
+    token = res.token;
 
-  return await events.once("pluginRegistered");
+    return await events.once("pluginRegistered");
+  }
+  else {
+    throw new Error(`Couldn't register plugin because the property at event.detail is not a function (received type ${typeof event.detail})`);
+  }
 }
