@@ -1,5 +1,5 @@
 {
-  "icon_128": "plugin_icon_128x128.png",
+  "icon_128": "icon/pink_128x128.png",
   "doc_license": {
     "path": "/LICENSE.txt",
     "integrity": false

@@ -1,6 +1,6 @@
 <div style="text-align: center;" align="center">
 
-<img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">
+<img src="./assets/icon/pink_128x128.png" width="80" height="80" alt="The default icon of this template in the pink color variant. Hexagonal gradient background, blocky white central letter P with black drop shadow.">
 <h2>BetterYTM Plugin Template</h2>
 <h4 style="margin-top: 0;">– compatible with BYTM v3.1.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v3.1.0" target="_blank">⧉</a></sup> –</h4>
 
@@ -113,7 +113,8 @@ Have fun creating your plugin!
     If a string path is given and it starts with a slash, it will be resolved relative to the root of the project, otherwise relative to the `assets/` folder.  
     If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which will by default automatically calculate the SRI hash for the asset and append it to the URL in the metadata block, unless explicitly set to `false`.  
     If you include files that can change outside your influence like libraries, make sure you use a CDN with versioned URLs, so the file doesn't change (because the hash will only be calculated once at build time). An example of this can be found in the `resources.json` file.
-- The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
+  - The folder `icons/` contains a few pre-made icons you can choose from for your plugin. They are released to the public domain, so no need to worry about copyright issues. You may also replace them with your own icon variants. The resolutions 1000x1000 (or similar) and 128x128 are recommended.
+- The `bytm/` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  
   I recommend you read up on Git submodules to understand how they work and how to update them.  
