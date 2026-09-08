@@ -27,7 +27,7 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
 
   try {
     // register the plugin with BetterYTM to be able to call authenticated API functions:
-    tryRegisterPlugin(event);
+    await tryRegisterPlugin(event);
     log(`Registered plugin successfully!\nUsing BetterYTM v${unsafeWindow.BYTM.version}\nPlugin build number: ${buildNumber} (${buildMode} mode)`);
   }
   catch(err) {
@@ -39,13 +39,13 @@ unsafeWindow.addEventListener("bytm:registerPlugin", async (event) => {
   try {
     // now hook into various events to run your code when certain parts are ready:
 
-    events.once("bytm:featureInitialized", (featureKey: string) => {
+    events.once("bytm:featureInitialized", (featureInitKey: string) => {
       // this code runs every time a feature is initialized, so you can use this to run code when a specific feature is ready
       // to see all available feature keys, refer to the first item in each `ftInit.push()` call in `bytm/src/index.ts`
       // or set the BYTM log level to debug and check the console with the filter `bytm:featureInitialized` to see all emitted events
 
-      if(featureKey === "initSiteEvents") {
-        // for example, call a function that depends on the siteEvents system in here:
+      if(featureInitKey === "thumbnailOverlay") {
+        // for example, run code that depends on the thumbnail overlay elements in here
       }
     });
 

@@ -33,7 +33,7 @@ export const pluginDef: PluginDef = {
     },
     // If you have a logo, you can add it here - it should *ideally* be square and between 48x48 and 128x128.
     // Also make sure it is hosted on a server where CORS is enabled (like the GitHub CDN below), otherwise the browser will block it.
-    iconUrl: "https://raw.githubusercontent.com/Sv443/BetterYTM-Plugin-Template/main/assets/plugin_icon_128x128.png",
+    iconUrl: "https://github.com/Sv443/BetterYTM-Plugin-Template/blob/v3.2.0-6/assets/icon/pink_128x128.png",
   },
   // If you have contributors defined in package.json, you can add them here:
   // contributors,
@@ -50,15 +50,29 @@ export let events: PluginRegisterResult["events"];
  */
 export let token: PluginRegisterResult["token"];
 
+/** Registration should only happen once, so this flag keeps track of that. */
+let pluginRegistered = false;
+
 /**
  * Call once after `bytm:registerPlugins` to try to register the plugin.  
  * Resolves as soon as `bytm:pluginsRegistered` was emitted.  
  * Throws if the {@linkcode pluginDef} is wrong.
  */
 export async function tryRegisterPlugin(event: WindowEventMap["bytm:registerPlugin"]) {
-  const res = event.detail(pluginDef);
-  events = res.events;
-  token = res.token;
+  if(pluginRegistered)
+    return;
+  pluginRegistered = true;
 
-  return await events.once("pluginRegistered");
+  // BetterYTM uses `CustomEvent`s, so the `detail` property contains the event data:
+  if(typeof event.detail === "function") {
+    const { detail: registerPlugin } = event;
+
+    const res = await registerPlugin(pluginDef);
+    events = res.events;
+    token = res.token;
+
+    return await events.once("pluginRegistered");
+  }
+  else
+    throw new Error(`Couldn't register plugin because the property at event.detail is not a function (received type ${typeof event.detail})`);
 }

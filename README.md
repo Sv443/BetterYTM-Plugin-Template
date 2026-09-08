@@ -1,6 +1,6 @@
 <div style="text-align: center;" align="center">
 
-<img src="./assets/plugin_icon_128x128.png" width="80" height="80" alt="default icon of this template">
+<img src="./assets/icon/pink_128x128.png" width="80" height="80" alt="The default icon of this template in the pink color variant. Hexagonal gradient background, blocky white central letter P with black drop shadow.">
 <h2>BetterYTM Plugin Template</h2>
 <h4 style="margin-top: 0;">– compatible with BYTM v3.1.0 <sup><a href="https://github.com/Sv443/BetterYTM/tree/v3.1.0" target="_blank">⧉</a></sup> –</h4>
 
@@ -113,7 +113,8 @@ Have fun creating your plugin!
     If a string path is given and it starts with a slash, it will be resolved relative to the root of the project, otherwise relative to the `assets/` folder.  
     If an object is given, it has to have the keys `path` (follows the same logic as above) and an optional `integrity` key, which will by default automatically calculate the SRI hash for the asset and append it to the URL in the metadata block, unless explicitly set to `false`.  
     If you include files that can change outside your influence like libraries, make sure you use a CDN with versioned URLs, so the file doesn't change (because the hash will only be calculated once at build time). An example of this can be found in the `resources.json` file.
-- The `bytm` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
+  - The folder `icons/` contains a few pre-made icons you can choose from for your plugin. They are released to the public domain, so no need to worry about copyright issues. You may also replace them with your own icon variants. The resolutions 1000x1000 (or similar) and 128x128 are recommended.
+- The `bytm/` folder contains BetterYTM's entire repository as a submodule (import prefix: `@bytm/`).  
   The branch of this submodule dictates which version of BetterYTM your plugin is compatible with.  
   `main` is the latest release version, `develop` is the latest in-dev version.  
   I recommend you read up on Git submodules to understand how they work and how to update them.  
@@ -152,19 +153,20 @@ Have fun creating your plugin!
 <br>
 
 ## Commands
-- `pnpm run dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
+- `pnpm dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
   This will also watch for changes and automatically rebuild the plugin, so the browser extension may automatically refresh it too.  
   The default URL is `http://localhost:8767/betterytm-plugin-template.user.js` (file name is created from `userscriptName` in `package.json`).
-- `pnpm run build` - Builds the plugin for production into the `dist` folder.  
+- `pnpm build` - Builds the plugin for production into the `dist` folder.  
   This should be committed for easy inspection and universal installation. This then also allows you to easily permalink to every version's code for users to install.
-- `pnpm run build-dev` - Builds the plugin for development into the `dist` folder.  
+- `pnpm build-dev` - Builds the plugin for development into the `dist` folder.  
   By default this only changes where assets are served from, but you can add your own tweaks in `vite.config.ts`.
-- `pnpm run serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
+- `pnpm serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
   This is useful for development and testing purposes.  
   Use `--port=n` to specify a different port (8767 by default) and `--auto-exit-time=n` to auto-shutdown the server after n seconds.
-- `pnpm run lint` - Lints the code with ESLint.  
+- `pnpm lint` - Lints the code with ESLint.  
   Feel free to modify the config at `eslint.config.mjs` to your liking.
-- `pnpm run format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
+- `pnpm format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
+- `pnpm clean-install` - Removes the `node_modules/` folder and `pnpm-lock.yaml` file, then runs `pnpm i` afterwards to do a fresh reinstall of all dependencies, including an updated lockfile.
 
 <br>
 

@@ -97,10 +97,10 @@ export default defineConfig(async ({ mode }) => {
             "https://youtube.com/*",
             "https://music.youtube.com/*",
           ],
-          icon: await getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
+          icon: await getResourceUrl(mode, "icon/pink_128x128.png", buildNbr),
           resource: {
-            icon_1000: await getResourceUrl(mode, "plugin_icon_1000x1000.png", buildNbr),
-            icon_128: await getResourceUrl(mode, "plugin_icon_128x128.png", buildNbr),
+            icon_1000: await getResourceUrl(mode, "icon/pink_1000x1000.png", buildNbr),
+            icon_128: await getResourceUrl(mode, "icon/pink_128x128.png", buildNbr),
             ...resources,
           },
         },
