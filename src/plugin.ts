@@ -50,20 +50,29 @@ export let events: PluginRegisterResult["events"];
  */
 export let token: PluginRegisterResult["token"];
 
+/** Registration should only happen once, so this flag keeps track of that. */
+let pluginRegistered = false;
+
 /**
  * Call once after `bytm:registerPlugins` to try to register the plugin.  
  * Resolves as soon as `bytm:pluginsRegistered` was emitted.  
  * Throws if the {@linkcode pluginDef} is wrong.
  */
 export async function tryRegisterPlugin(event: WindowEventMap["bytm:registerPlugin"]) {
+  if(pluginRegistered)
+    return;
+  pluginRegistered = true;
+
+  // BetterYTM uses `CustomEvent`s, so the `detail` property contains the event data:
   if(typeof event.detail === "function") {
-    const res = await event.detail(pluginDef);
+    const { detail: registerPlugin } = event;
+
+    const res = await registerPlugin(pluginDef);
     events = res.events;
     token = res.token;
 
     return await events.once("pluginRegistered");
   }
-  else {
+  else
     throw new Error(`Couldn't register plugin because the property at event.detail is not a function (received type ${typeof event.detail})`);
-  }
 }
