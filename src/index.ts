@@ -13,8 +13,6 @@ import "@/types.js";
 
 // #region register plugin
 
-// TODO:FIXME: this event somehow isnt emitted
-
 // this is the earliest point you may register the plugin - it is executed before the DOM is loaded and before BYTM has loaded anything asynchronous, like its feature configuration, but immediately after the plugin interface is ready:
 unsafeWindow.addEventListener("bytm:preInitPlugin", async () => {
   log("bytm:preInitPlugin was emitted");
