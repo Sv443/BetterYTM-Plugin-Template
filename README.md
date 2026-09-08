@@ -153,19 +153,20 @@ Have fun creating your plugin!
 <br>
 
 ## Commands
-- `pnpm run dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
+- `pnpm dev` - Builds the plugin using the `build-dev` command and hosts it on a local server for testing using the `serve` command on default settings (or whatever is set in `.env`).  
   This will also watch for changes and automatically rebuild the plugin, so the browser extension may automatically refresh it too.  
   The default URL is `http://localhost:8767/betterytm-plugin-template.user.js` (file name is created from `userscriptName` in `package.json`).
-- `pnpm run build` - Builds the plugin for production into the `dist` folder.  
+- `pnpm build` - Builds the plugin for production into the `dist` folder.  
   This should be committed for easy inspection and universal installation. This then also allows you to easily permalink to every version's code for users to install.
-- `pnpm run build-dev` - Builds the plugin for development into the `dist` folder.  
+- `pnpm build-dev` - Builds the plugin for development into the `dist` folder.  
   By default this only changes where assets are served from, but you can add your own tweaks in `vite.config.ts`.
-- `pnpm run serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
+- `pnpm serve` - Serves a few folders including `dist` and `assets` on a locally hosted HTTP server.  
   This is useful for development and testing purposes.  
   Use `--port=n` to specify a different port (8767 by default) and `--auto-exit-time=n` to auto-shutdown the server after n seconds.
-- `pnpm run lint` - Lints the code with ESLint.  
+- `pnpm lint` - Lints the code with ESLint.  
   Feel free to modify the config at `eslint.config.mjs` to your liking.
-- `pnpm run format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
+- `pnpm format` - Formats all auto-fixable problems in the code with ESLint, according to the config.
+- `pnpm clean-install` - Removes the `node_modules/` folder and `pnpm-lock.yaml` file, then runs `pnpm i` afterwards to do a fresh reinstall of all dependencies, including an updated lockfile.
 
 <br>
 

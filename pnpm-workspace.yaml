@@ -1,3 +1,10 @@
+# only allow 7+ day old package releases - helps a ton against supply chain attacks:
+minimumReleaseAge: 10080
+
+# use exact versions ("x.y.z") when installing packages instead of the "^x.y.z" format:
+saveExact: true
+
+# allow esbuild scripts to run by default:
 allowBuilds:
   esbuild: true
 onlyBuiltDependencies:

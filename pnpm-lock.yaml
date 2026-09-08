@@ -9,74 +9,74 @@ importers:
   .:
     dependencies:
       '@sv443-network/coreutils':
-        specifier: ^2.0.3
+        specifier: 2.0.3
         version: 2.0.3
       '@sv443-network/userutils':
-        specifier: ^9.4.4
+        specifier: 9.4.4
         version: 9.4.4
       compare-versions:
-        specifier: ^6.1.1
+        specifier: 6.1.1
         version: 6.1.1
       nanoevents:
-        specifier: ^9.1.0
+        specifier: 9.1.0
         version: 9.1.0
       tslib:
-        specifier: ^2.8.1
+        specifier: 2.8.1
         version: 2.8.1
     devDependencies:
       '@eslint/eslintrc':
-        specifier: ^3.3.7
+        specifier: 3.3.7
         version: 3.3.7(supports-color@5.5.0)
       '@eslint/js':
-        specifier: ^9.39.5
+        specifier: 9.39.5
         version: 9.39.5
       '@types/express':
-        specifier: ^4.17.25
+        specifier: 4.17.25
         version: 4.17.25
       '@types/node':
-        specifier: ^22.20.1
+        specifier: 22.20.1
         version: 22.20.1
       '@types/tampermonkey':
-        specifier: ^5.5.0
+        specifier: 5.5.0
         version: 5.5.0
       '@typescript-eslint/eslint-plugin':
-        specifier: ^8.69.0
+        specifier: 8.69.0
         version: 8.69.0(@typescript-eslint/parser@8.69.0(eslint@9.39.5(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.9.3))(eslint@9.39.5(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.9.3)
       '@typescript-eslint/parser':
-        specifier: ^8.69.0
+        specifier: 8.69.0
         version: 8.69.0(eslint@9.39.5(supports-color@5.5.0))(supports-color@5.5.0)(typescript@5.9.3)
       concurrently:
-        specifier: ^8.2.2
+        specifier: 8.2.2
         version: 8.2.2
       dotenv:
-        specifier: ^16.6.1
+        specifier: 16.6.1
         version: 16.6.1
       eslint:
-        specifier: ^9.39.5
+        specifier: 9.39.5
         version: 9.39.5(supports-color@5.5.0)
       express:
-        specifier: ^4.22.2
+        specifier: 4.22.2
         version: 4.22.2(supports-color@5.5.0)
       globals:
-        specifier: ^15.15.0
+        specifier: 15.15.0
         version: 15.15.0
       nodemon:
-        specifier: ^3.1.14
+        specifier: 3.1.14
         version: 3.1.14
       tsx:
-        specifier: ^4.23.13
+        specifier: 4.23.13
         version: 4.23.13
       typescript:
-        specifier: ^5.9.3
+        specifier: 5.9.3
         version: 5.9.3
       vite:
-        specifier: ^5.4.21
+        specifier: 5.4.21
         version: 5.4.21(@types/node@22.20.1)
       vite-plugin-monkey:
-        specifier: ^4.0.6
+        specifier: 4.0.6
         version: 4.0.6(vite@5.4.21(@types/node@22.20.1))
       vite-tsconfig-paths:
-        specifier: ^5.1.4
+        specifier: 5.1.4
         version: 5.1.4(supports-color@5.5.0)(typescript@5.9.3)(vite@5.4.21(@types/node@22.20.1))
 
 packages:
@@ -1410,8 +1410,8 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  postcss@8.5.28:
-    resolution: {integrity: sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A==}
+  postcss@8.5.26:
+    resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -2935,7 +2935,7 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  postcss@8.5.28:
+  postcss@8.5.26:
     dependencies:
       nanoid: 3.3.18
       picocolors: 1.1.1
@@ -3215,7 +3215,7 @@ snapshots:
   vite@5.4.21(@types/node@22.20.1):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.5.28
+      postcss: 8.5.26
       rollup: 4.63.1
     optionalDependencies:
       '@types/node': 22.20.1
